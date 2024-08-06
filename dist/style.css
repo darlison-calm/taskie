@@ -1,64 +1,53 @@
-html {
-  box-sizing: border-box;
-}
+  html {
+    box-sizing: border-box;
+  }
 
-*,
-*::after,
-*::before {
-  box-sizing: inherit;
-}
+  *,
+  *::after,
+  *::before {
+    box-sizing: inherit;
+  }
 
-body, h1, h2, h3, h4, h5, h6, p, ul, ol{
-  padding: 0;
-  margin: 0;
-}
+  body, h1, h2, h3, h4, h5, h6, p, ul, ol{
+    margin: 0;
+    padding: 0;
+  }
 
-:root {
-  font-size: 20px;
+
+  :root {
+    font-size: 15px;
+    
+    --ff: "Inter", sans-serif;
+    --primary-dark: #000814;
+    --secondary-dark: #001D3D;
+    --primary-special-color: #FFC300;
+    --primary-light: #eee;
+    --secondary-light: #c7c7c7;
+
+    --margin-xxs: .25rem;
+    --margin-xs: .5rem;
+    --margin-s: .75rem;
+    --margin-m: 1rem;
+    --margin-l: 1.25rem;
+    --margin-xl: 1.75rem;
+    --margin-xxl: 2.25rem;
+  }
   
-  --gray: #eeeeee;
-
-  --margin-xxs: .25rem;
-  --margin-xs: .5rem;
-  --margin-s: .75rem;
-  --margin-m: 1rem;
-  --margin-l: 1.25rem;
-  --margin-xl: 1.75rem;
-}
-
-body {
-  display: flex;
-  min-height: 100vh;
-}
-
-button{
-  background: none;
-  cursor: pointer;
-  border: none;
-}
-
-.content {
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-}
-
-.sidebar {
-  background-color: var(--gray);
-  min-width: 250px;
-  & button {
-    font-size: 1.3rem;
+  button {
+    background: none;
+    cursor: pointer;
+    border: none;
   }
-}
-
-ul {
-  list-style: none;
-  & li {
-    margin: var(--margin-l) var(--margin-xs);
+  
+  .content {
+    display: grid;
+    grid-template: auto / 1fr 6fr;
+    min-height: 100vh;
   }
-}
 
-.projects-container {
-  background-color: blueviolet;
-  flex: 1;
-}
+  .task-view {
+    flex: 1;
+    background-color:var(--secondary-dark);
+    color: white;
+    padding: 20px;
+  }
