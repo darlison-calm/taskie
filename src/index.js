@@ -1,11 +1,12 @@
 import { projectForm } from "./project-form";
 import { subscribeToProjectEvents } from "./project";
-loadHome()
+import { taskForm } from "./task-form";
 
 //TODO: 
 projectForm.setupAddProjectEventListener();
-taskForm.setupAddTaskEventListener()
-subscribeToProjectEvents()
+subscribeToProjectEvents();
+taskForm.setupAddTaskEventListener();
+
 
 
 //document.addEventListener('click', e => {
