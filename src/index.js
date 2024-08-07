@@ -8,9 +8,9 @@ projectForm.setupAddProjectEventListener();
 subscribeToProjectEvents()
 
 
-document.addEventListener('click', e => {
-  console.log(e.target)
-})
+//document.addEventListener('click', e => {
+  //console.log(e.target)
+//})
 
 
 

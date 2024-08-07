@@ -1,11 +1,14 @@
 import PubSub from "./utils/pubsub"
 import { EVENTS } from "./utils/constants"
+import { addDomElement } from "./utils/addDomElement"
 
 
 const projectsManager = (function() {
   const projects = []
 
   const addProject = (project) => {
+    //TO DO
+    //CHECK IF A PROJECT WAS ALREADY ADDD    
     projects.push(project)
     PubSub.publish(EVENTS.PROJECT_LIST_UPDATE , projectsManager.getProjects())
   }
@@ -22,18 +25,22 @@ const projectsManager = (function() {
 })()
 
 function displayProjectList(projects) {
-  const projectsContainer = document.querySelector(".projects-container");
+  const projectsContainer = document.getElementById("projects-container");
   projectsContainer.innerHTML = ''
 
-  let projectList = document.createElement('ul')
-
   projects.forEach(pro => {
-    let projectItem = document.createElement('li')
-    projectItem.textContent = pro
-    projectList.appendChild(projectItem)
+    let projectItem = addDomElement({
+      tag: 'button',
+      textContent: pro,
+      className: 'btn-projects',
+      attr: {
+        'data-index': `${pro} Project`
+      }
+    });
+
+    projectsContainer.append(projectItem);
   });
 
-  projectsContainer.appendChild(projectList)
 }
 
 export function subscribeToProjectEvents(){
