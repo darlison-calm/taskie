@@ -1,13 +1,21 @@
 import { projectForm } from "./project-form";
 import { subscribeToProjectEvents } from "./project";
-import { taskForm } from "./task-form";
-import { subscribeToTaskEvents } from "./task-factory";
+loadHome()
 
 //TODO: 
 projectForm.setupAddProjectEventListener();
-subscribeToProjectEvents()
 taskForm.setupAddTaskEventListener()
-subscribeToTaskEvents()
+subscribeToProjectEvents()
+
+
+//document.addEventListener('click', e => {
+  //console.log(e.target)
+//})
+
+
+
+
+
 
 
 //const todos = []

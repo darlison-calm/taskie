@@ -1,6 +1,10 @@
 import PubSub from "./utils/pubsub"
 import { EVENTS } from "./utils/constants"
+<<<<<<< HEAD
 import { displayProjectList } from "./UI"
+=======
+import { addDomElement } from "./utils/addDomElement"
+>>>>>>> 7897cb17636323e426bd322eb4c48c5cb4f9faff
 
 const projectsManager = (function() {
   const projects = []
