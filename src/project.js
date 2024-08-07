@@ -2,7 +2,6 @@ import PubSub from "./utils/pubsub"
 import { EVENTS } from "./utils/constants"
 import { addDomElement } from "./utils/addDomElement"
 
-
 const projectsManager = (function() {
   const projects = []
 
