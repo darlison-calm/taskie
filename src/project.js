@@ -1,7 +1,6 @@
 import PubSub from "./utils/pubsub"
 import { EVENTS } from "./utils/constants"
-import { addDomElement } from "./utils/addDomElement"
-
+import { displayProjectList } from "./UI"
 
 const projectsManager = (function() {
   const projects = []
@@ -23,25 +22,6 @@ const projectsManager = (function() {
     getProjects
   }
 })()
-
-function displayProjectList(projects) {
-  const projectsContainer = document.getElementById("projects-container");
-  projectsContainer.innerHTML = ''
-
-  projects.forEach(pro => {
-    let projectItem = addDomElement({
-      tag: 'button',
-      textContent: pro,
-      className: 'btn-projects',
-      attr: {
-        'data-index': `${pro} Project`
-      }
-    });
-
-    projectsContainer.append(projectItem);
-  });
-
-}
 
 export function subscribeToProjectEvents(){
   PubSub.subscribe(EVENTS.PROJECT_ADDED, projectsManager.addProject)

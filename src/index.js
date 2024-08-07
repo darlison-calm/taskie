@@ -8,14 +8,6 @@ projectForm.setupAddProjectEventListener();
 subscribeToProjectEvents()
 
 
-//document.addEventListener('click', e => {
-  //console.log(e.target)
-//})
-
-
-
-
-
 
 
 //const todos = []

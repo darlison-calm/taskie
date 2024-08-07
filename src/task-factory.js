@@ -1,4 +1,26 @@
-export class TodoFactory {
+import PubSub from "./utils/pubsub";
+import { EVENTS } from "./utils/constants";
+
+const taskManager = (function() {
+  const tasksList = []
+
+  const addTask = (task) => {
+    tasksList.push(task);
+    console.log(getTasks());
+  }
+
+  const getTasks = () => {
+    return tasksList
+  }
+
+  return {
+    addTask,
+    getTasks
+  }
+
+})()
+
+export class Task {
   static todoIds = 0
   
   constructor(title, dueDate, priority, description, complete) {
@@ -13,7 +35,7 @@ export class TodoFactory {
   }
  
   giveId(){
-    this._id = TodoFactory.todoIds++
+    this._id = Task.todoIds++
   }
 
   get title() {
@@ -64,3 +86,11 @@ export class TodoFactory {
     this._projectId = value
   }
 }
+
+//TODO
+//DISPLAY TASK
+
+export function subscribeToTaskEvents(){
+  PubSub.subscribe(EVENTS.TASK_ADDED, taskManager.addTask)
+}
+

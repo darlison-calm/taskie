@@ -18,7 +18,7 @@ export const projectForm = {
   },
 
   add() {
-    let input = document.querySelector('#project-form input')
+    let input = document.querySelector('#project-name')
     let title = input.value
     input.value = ''
 
