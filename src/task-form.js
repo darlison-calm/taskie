@@ -7,6 +7,7 @@ export const taskForm = {
     const taskModal = document.getElementById('task-dialog')
     const addTaskBtn = document.getElementById('add-task') 
     const form = document.getElementById('task-form')
+    console.log(taskModal, addTaskBtn, form); 
     
     addTaskBtn.addEventListener('click', () => taskModal.showModal())
 

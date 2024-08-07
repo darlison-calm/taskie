@@ -1,13 +1,13 @@
-import { loadHome } from "./homePage";
 import { projectForm } from "./project-form";
 import { subscribeToProjectEvents } from "./project";
-loadHome()
+import { taskForm } from "./task-form";
+import { subscribeToTaskEvents } from "./task-factory";
 
 //TODO: 
 projectForm.setupAddProjectEventListener();
 subscribeToProjectEvents()
-
-
+taskForm.setupAddTaskEventListener()
+subscribeToTaskEvents()
 
 
 //const todos = []

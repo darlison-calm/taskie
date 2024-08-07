@@ -6,7 +6,7 @@ const taskManager = (function() {
 
   const addTask = (task) => {
     tasksList.push(task);
-    console.log(getTasks());
+    console.log(taskManager.getTasks());
   }
 
   const getTasks = () => {
