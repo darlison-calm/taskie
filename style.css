@@ -13,6 +13,10 @@
     padding: 0;
   }
 
+  body {
+    word-wrap: break-word;
+  }
+
 
   :root {
     font-size: 15px;
@@ -41,13 +45,8 @@
   
   .content {
     display: grid;
-    grid-template: auto / 1fr 6fr;
+    grid-template: auto / 1fr 7fr;
     min-height: 100vh;
   }
 
-  .task-view {
-    flex: 1;
-    background-color:var(--secondary-dark);
-    color: white;
-    padding: 20px;
-  }
+  

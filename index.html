@@ -6,6 +6,7 @@
   <title>ToDoList</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="sidebar.css">
+  <link rel="stylesheet" href="task-styles.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
 </head>
 <body>
@@ -13,7 +14,7 @@
     <main class="content">
       <div class="sidebar">    
         <div class="sidebar-nav">
-            
+
           <div class="nav-item">
               <button class="button-nav" id="add-task">
                 <span class="material-symbols-outlined">add_circle</span>
@@ -56,7 +57,8 @@
         </div>
       </div>
       
-      <div class="task-view">
+      <div class="tasks-container">
+        <div  class="task-grid" id="task-list"></div>
       </div>
     
     </main>
@@ -89,16 +91,15 @@
 
         <div class="input-container">
           <label for="task-date">Due Date</label>
-          <input type="text" id="task-date">
-          <input type="text" id="task-date">
+          <input type="date" id="task-date" value="" min="2024-08-08" max="2100-01-01">
         </div>
       
         <div class="input-container">
           <label for="task-priority"></label>
           <select id="task-priority" required>
-            <option value="high">High</option>
-            <option value="medium">Medium</option>
-            <option value="low">Low</option>
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
           </select>
         </div>
         <button type="submit" id="confirm-new-task">Add Task</button>
