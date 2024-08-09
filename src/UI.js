@@ -1,4 +1,6 @@
 import { addDomElement } from "./utils/addDomElement";
+import { format } from "date-fns";
+
 
 export function displayProjectList(projects) {
   const projectsContainer = document.getElementById("projects-container");
@@ -16,5 +18,74 @@ export function displayProjectList(projects) {
 
     projectsContainer.append(projectItem);
   });
-
 }
+
+export function displayTaskList(tasks) {
+  const list = document.querySelector('#task-list');
+  list.innerHTML = ''
+  tasks.forEach(task => {
+    const itemTask = addDomElement({
+      tag: 'div',
+      className: 'task-item',
+      attr: {
+        'data-index' : task.id,
+        'data-project': task.projectId || ''
+      }
+    })
+
+    const taskInfo = addDomElement({
+      tag: 'div',
+      className: 'task-info',
+    })
+
+    const checkbox = addDomElement({
+      tag: 'input',
+      attr: {
+        type: 'checkbox'
+      }
+    })
+    
+    const title = addDomElement({
+      tag: 'div',
+      className: 'task-title',
+      textContent: task.title,
+    })
+
+    const description = addDomElement({
+      tag: 'span',
+      className: 'task-description',
+      textContent: task.description, 
+    })
+
+    const divzz = addDomElement({
+      tag: 'div',
+      className: 'task-priority-date'
+    })
+
+    const priority = addDomElement({
+      tag: 'span',
+      className: 'task-priority',
+      textContent: task.priority
+    })
+ 
+    const dateString = new Date(task.dueDate.replace(/-/g, '/'))
+    const date = addDomElement({
+      tag: 'span',
+      className: 'task-date',
+      textContent: format(dateString, 'MMMM d, yyyy')
+    })
+    divzz.appendChild(date)
+    divzz.appendChild(priority)
+
+    taskInfo.appendChild(title)
+    taskInfo.appendChild(description)
+    taskInfo.appendChild(divzz)
+    
+    itemTask.appendChild(checkbox)
+    itemTask.appendChild(taskInfo)
+
+    list.appendChild(itemTask)
+  })
+}
+
+

@@ -1,11 +1,14 @@
 import PubSub from "./utils/pubsub";
 import { EVENTS } from "./utils/constants";
+import { displayTaskList} from "./UI";
 
 const taskManager = (function() {
   const tasksList = []
 
   const addTask = (task) => {
     tasksList.push(task);
+    PubSub.publish(EVENTS.TASK_LIST_UPDATE, taskManager.getTasks())
+    //pubsub to ui display method  
     console.log(taskManager.getTasks());
   }
 
@@ -21,21 +24,20 @@ const taskManager = (function() {
 })()
 
 export class Task {
-  static todoIds = 0
+  static taskIds = 0
   
-  constructor(title, dueDate, priority, description, complete) {
+  constructor(title, dueDate = '', priority = '', description, complete = '') {
     this._title = title;
     this._dueDate = dueDate;
     this._priority = priority;
     this._description = description;
     this._complete = complete;
     this._projectId = ''
-    this._id;
-    this.giveId()
+    this._id = Task.taskIds++
   }
- 
-  giveId(){
-    this._id = Task.todoIds++
+
+  get id() {
+    return this._id;
   }
 
   get title() {
@@ -74,12 +76,12 @@ export class Task {
     return this._complete;
   }
 
-  togleComplete() {
+  toogleComplete() {
     this._complete = !this._complete
   }
 
   get projectId() {
-    return this._projectId = value
+    return this._projectId 
   }
 
   set projectId(value) {
@@ -92,5 +94,6 @@ export class Task {
 
 export function subscribeToTaskEvents(){
   PubSub.subscribe(EVENTS.TASK_ADDED, taskManager.addTask)
+  PubSub.subscribe(EVENTS.TASK_LIST_UPDATE, displayTaskList)
 }
 
