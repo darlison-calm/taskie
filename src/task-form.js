@@ -15,7 +15,7 @@ export const taskForm = {
     })
 
     form.querySelector('#cancel-new-task').addEventListener('click', () => taskModal.close())
-    form.querySelector('#confirm-new-task').addEventListener('click', (e) => {
+    form.addEventListener('submit', (e) => {
       e.preventDefault()
       taskForm.add()
       taskModal.close()

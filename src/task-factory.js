@@ -16,9 +16,14 @@ const taskManager = (function() {
     return tasksList
   }
 
+  const deleteTask = (index) => {
+    tasksList.slice(index, 1)
+  }
+
   return {
     addTask,
-    getTasks
+    getTasks,
+    deleteTask
   }
 
 })()
