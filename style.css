@@ -54,7 +54,7 @@
     width: 14%;
   }
 
-  .tasks-container {
+.tasks-container {
     background-color: var(--secondary-dark);
     flex: 1;
   }
@@ -79,7 +79,12 @@
   align-items: center;
   justify-content: flex-start;
   gap: 4px;
-  font-size: 1.3rem;
+  font-size: 1rem;
+}
+
+
+.completed {
+  text-decoration: line-through;
 }
 
 
@@ -96,6 +101,14 @@
   }
 }
 
+.task-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.task-item {
+  border: 2px solid var(--primary-light);
+}
 
 
 
