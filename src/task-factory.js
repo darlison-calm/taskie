@@ -17,7 +17,8 @@ const taskManager = (function() {
   }
 
   const deleteTask = (index) => {
-    tasksList.slice(index, 1)
+    tasksList.splice(index, 1)
+    PubSub.publish(EVENTS.TASK_LIST_UPDATE, taskManager.getTasks())
   }
 
   return {
@@ -29,16 +30,14 @@ const taskManager = (function() {
 })()
 
 export class Task {
-  static taskIds = 0
   
-  constructor(title, dueDate = '', priority = '', description, complete = '') {
+  constructor(title, dueDate = '', priority = '', description, complete = false) {
     this._title = title;
     this._dueDate = dueDate;
     this._priority = priority;
     this._description = description;
     this._complete = complete;
     this._projectId = ''
-    this._id = Task.taskIds++
   }
 
   get id() {
@@ -100,5 +99,6 @@ export class Task {
 export function subscribeToTaskEvents(){
   PubSub.subscribe(EVENTS.TASK_ADDED, taskManager.addTask)
   PubSub.subscribe(EVENTS.TASK_LIST_UPDATE, displayTaskList)
+  PubSub.subscribe(EVENTS.TASK_DELETED, taskManager.deleteTask)
 }
 

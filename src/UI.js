@@ -1,4 +1,5 @@
-
+import Pubsub from "./utils/pubsub"
+import { EVENTS } from "./utils/constants";
 import { addDomElement } from "./utils/addDomElement";
 import { format } from "date-fns";
 
@@ -22,7 +23,7 @@ export function displayProjectList(projects) {
 
 
 
-function displayTask(task, tasksContainer) {
+function displayTask(task, tasksContainer, position) {
   const itemTask = addDomElement({
     tag: 'div',
     className: 'task-item',
@@ -40,6 +41,20 @@ function displayTask(task, tasksContainer) {
     }
   })
 
+  checkbox.addEventListener('click', () => {
+    task.toogleComplete()
+    if(task.complete === true) {
+      title.classList.add("completed")
+      return
+    }
+    title.classList.remove("completed")
+  })
+
+  const divTitleAnBtn = addDomElement({
+    tag : 'div',
+    className : 'task-priority-date'
+  })
+
   const title = addDomElement({
     tag: 'div',
     className: 'task-title',
@@ -51,11 +66,17 @@ function displayTask(task, tasksContainer) {
     className: 'btn-delete',
     textContent: "DELETE",
     attr: {
-      'data-index' : task.id,
+      'data-index' : position,
     }
   })
 
-  title.appendChild(btnDelete);
+  btnDelete.addEventListener('click', (e) => {
+    const index = Number(e.target.dataset.index)
+    Pubsub.publish(EVENTS.TASK_DELETED, index)
+  })
+
+  divTitleAnBtn.appendChild(title);
+  divTitleAnBtn.appendChild(btnDelete)
 
   const description = addDomElement({
     tag: 'span',
@@ -83,7 +104,7 @@ function displayTask(task, tasksContainer) {
   divzz.appendChild(date)
   divzz.appendChild(priority)
 
-  taskInfo.appendChild(title)
+  taskInfo.appendChild(divTitleAnBtn)
   taskInfo.appendChild(description)
   taskInfo.appendChild(divzz)
   
@@ -96,8 +117,8 @@ function displayTask(task, tasksContainer) {
 export function displayTaskList(tasks) {
   const list = document.querySelector('#task-list');
   list.innerHTML = ''
-  tasks.forEach(task => {
-   displayTask(task, list)
+  tasks.forEach((task, index) => {
+   displayTask(task, list, index)
   })
 }
 
