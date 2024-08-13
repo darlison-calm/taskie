@@ -44,10 +44,65 @@
     border: none;
   }
   
-  .content {
-    display: grid;
-    grid-template-columns: 1fr 5fr;
+.content {
+    display: flex;
     min-height: 100vh;
   }
+
+.sidebar {
+    background-color: var(--primary-dark);
+    width: 14%;
+  }
+
+  .tasks-container {
+    background-color: var(--secondary-dark);
+    flex: 1;
+  }
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.nav-item {
+  padding: var(--margin-xxs) var(--margin-xxs);
+  margin: var(--margin-xxs) var(--margin-xs);
+  & button {
+    color: white;
+  }
+}
+
+.button-nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 4px;
+  font-size: 1.3rem;
+}
+
+
+.projects-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-top: 2px solid var(--primary-special-color);
+  margin: var(--margin-xs) var(--margin-xs);
+  & .btn-projects {
+    color: white;
+    margin: var(--margin-xs) var(--margin-xs);
+    font-size: 1.2rem;
+  }
+}
+
+
+
+
+
+
+
+
+
 
   
