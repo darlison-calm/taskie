@@ -1,5 +1,5 @@
 import PubSub from "./utils/pubsub";
-import {Task} from "./task-factory";
+import { Task } from "./task-factory";
 import { EVENTS } from "./utils/constants";
 export const taskForm = {
   
@@ -31,7 +31,5 @@ export const taskForm = {
     const task = new Task(title, date, priority, description)
     
     PubSub.publish(EVENTS.TASK_ADDED, task)
-  }
-
-  
+  } 
 }

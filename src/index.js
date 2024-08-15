@@ -1,13 +1,27 @@
 import { projectForm } from "./project-form";
 import { subscribeToProjectEvents } from "./project";
 import { taskForm } from "./task-form";
-import { subscribeToTaskEvents } from "./task-factory";
+import { subscribeToInitialTaskEvents } from "./task-factory";
+import { taskManager} from "./task-factory"
 
+import PubSub from "./utils/pubsub";
+import { EVENTS } from "./utils/constants";
+import { setupNavTasksButtons} from "./navigation";
+import { initializeNavigation } from "./navigation";
 //TODO: 
 projectForm.setupAddProjectEventListener();
 subscribeToProjectEvents();
 taskForm.setupAddTaskEventListener();
-subscribeToTaskEvents()
+subscribeToInitialTaskEvents();
+initializeNavigation()
+
+
+
+//display today tasks
+
+
+
+
 
 //const todos = []
 /* function addTodoItem(title, dueDate = '', priority = '', description = '', complete = false) {

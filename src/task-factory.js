@@ -1,15 +1,13 @@
 import PubSub from "./utils/pubsub";
 import { EVENTS } from "./utils/constants";
-import { displayTaskList} from "./UI";
+import { displayAllTasks} from "./UI";
 
-const taskManager = (function() {
+export const taskManager = (function() {
   const tasksList = []
 
   const addTask = (task) => {
     tasksList.push(task);
     PubSub.publish(EVENTS.TASK_LIST_UPDATE, taskManager.getTasks())
-    //pubsub to ui display method  
-    console.log(taskManager.getTasks());
   }
 
   const getTasks = () => {
@@ -30,7 +28,6 @@ const taskManager = (function() {
 })()
 
 export class Task {
-  
   constructor(title, dueDate = '', priority = '', description, complete = false) {
     this._title = title;
     this._dueDate = dueDate;
@@ -93,12 +90,9 @@ export class Task {
   }
 }
 
-//TODO
-//DISPLAY TASK
-
-export function subscribeToTaskEvents(){
+export function subscribeToInitialTaskEvents(){
   PubSub.subscribe(EVENTS.TASK_ADDED, taskManager.addTask)
-  PubSub.subscribe(EVENTS.TASK_LIST_UPDATE, displayTaskList)
+  PubSub.subscribe(EVENTS.TASK_LIST_UPDATE, displayAllTasks)
   PubSub.subscribe(EVENTS.TASK_DELETED, taskManager.deleteTask)
 }
 

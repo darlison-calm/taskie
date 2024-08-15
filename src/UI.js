@@ -1,7 +1,7 @@
 import Pubsub from "./utils/pubsub"
 import { EVENTS } from "./utils/constants";
 import { addDomElement } from "./utils/addDomElement";
-import { format } from "date-fns";
+import { isSameDay, isSameWeek, format, isThisWeek } from "date-fns";
 
 export function displayProjectList(projects) {
   const projectsContainer = document.getElementById("projects-container");
@@ -13,15 +13,12 @@ export function displayProjectList(projects) {
       textContent: pro,
       className: 'btn-projects',
       attr: {
-        'data-index': `${pro} Project`
+        'data-index': pro
       }
     });
-
     projectsContainer.append(projectItem);
   });
 }
-
-
 
 function displayTask(task, tasksContainer, position) {
   const itemTask = addDomElement({
@@ -52,7 +49,7 @@ function displayTask(task, tasksContainer, position) {
 
   const divTitleAnBtn = addDomElement({
     tag : 'div',
-    className : 'task-priority-date'
+    className : 'title-btn-container'
   })
 
   const title = addDomElement({
@@ -114,12 +111,43 @@ function displayTask(task, tasksContainer, position) {
   tasksContainer.appendChild(itemTask)
 }
 
-export function displayTaskList(tasks) {
+export function displayAllTasks(tasks) {
   const list = document.querySelector('#task-list');
   list.innerHTML = ''
   tasks.forEach((task, index) => {
    displayTask(task, list, index)
   })
 }
+
+function displayTasksBasedOnCondition(tasks, conditionFn) {
+  const today = new Date();
+  const todaysString = format(today, 'yyyy-MM-dd');
+  
+  const list = document.querySelector('#task-list');
+  list.innerHTML = '';
+  
+  tasks.forEach((task, index) => {
+    if (conditionFn(todaysString, task.dueDate)) {
+      displayTask(task, list, index);
+    }
+  });
+}
+
+export function displayTodaysTasks(tasks) {
+  const isToday = (todaysString, dueDate) => isSameDay(todaysString, dueDate);
+  displayTasksBasedOnCondition(tasks, isToday);
+}
+
+export function displayWeekTasks(tasks) {
+  const isThisWeek = (todaysString, dueDate) => isSameWeek(todaysString, dueDate);
+  displayTasksBasedOnCondition(tasks, isThisWeek);
+}
+
+export function manageActiveBtnStyle(button) {
+  document.querySelectorAll('.button-nav').forEach(btn => btn.classList.remove('button-active'));
+  button.classList.add('button-active')
+}
+
+
 
 
