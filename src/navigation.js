@@ -9,6 +9,7 @@ export function initializeNavigation() {
   setupNavTasksButtons('#week-btn', displayWeekTasks, [displayAllTasks, displayTodaysTasks]);
 }
 
+
 function setupNavTasksButtons(buttonId, displayFn, unsubscribeFn) {
   const button = document.querySelector(buttonId)
   
@@ -28,3 +29,4 @@ function updateTasks() {
   const tasks = taskManager.getTasks();
   PubSub.publish(EVENTS.TASK_LIST_UPDATE, tasks);
 }
+

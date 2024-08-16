@@ -14,21 +14,21 @@
         <div class="sidebar-nav">
 
           <div class="nav-item">
-              <button class="button-nav" id="add-task">
+              <button class="button-nav button-nav-tasks" id="add-task">
                 <span class="material-symbols-outlined">add_circle </span>
                 <span>Add Task</span>
               </button>
           </div>
             
           <div class="nav-item">
-              <button class="button-nav" id="all-btn"><span class="material-symbols-outlined">
+              <button class="button-nav button-nav-tasks" id="all-btn"><span class="material-symbols-outlined">
                 format_list_bulleted
                 </span>
-                <span>All Tasks</span>
+                <span>Inbox</span>
               </button>
           </div>
             <div class="nav-item">
-              <button class="button-nav" id="today-btn">
+              <button class="button-nav button-nav-tasks" id="today-btn">
                 <span class="material-symbols-outlined">
               today
               </span>
@@ -36,7 +36,7 @@
               </button>
             </div>
             <div class="nav-item">
-              <button class="button-nav" id="week-btn">
+              <button class="button-nav button-nav-tasks" id="week-btn">
                 <span class="material-symbols-outlined">
                   date_range
                   </span>
@@ -44,7 +44,7 @@
               </button>
             </div>
             <div class="nav-item">
-              <button class="button-nav" id="add-project">
+              <button class="button-nav button-nav-tasks" id="add-project">
                 <span class="material-symbols-outlined">add_circle</span>
                 <span>Add Project</span>
               </button>
@@ -63,14 +63,10 @@
       <dialog close id="project-dialog">
               
         <form id="project-form">   
-          
-          <p>Project Name:</p>   
-          
-          <input type="text" id="project-name" name="project-name" required>
-          
+          <label for="project-name">Project Name: </p>   
+          <input type="text" id="project-name" name="project-name" maxlength="20" required>
           <button type="submit" id="confirm">Confirm</button>  
           <button id="cancel" type="reset">Cancel</button>
-        
         </form>
       
       </dialog>
@@ -83,7 +79,7 @@
         </div>        
         
         <div class="input-container">
-          <label for="task-description"></label>
+          <label for="task-description">Details(optional)</label>
           <input type="text" id="task-description" placeholder="description" maxlength="150">
         </div>
 
@@ -93,13 +89,21 @@
         </div>
       
         <div class="input-container">
-          <label for="task-priority"></label>
+          <label for="task-priority">Priority: </label>
           <select id="task-priority" required>
             <option value="High">High</option>
             <option value="Medium">Medium</option>
             <option value="Low">Low</option>
           </select>
         </div>
+
+        <div class="input-container">
+          <label for="task-project">Project: </label>
+          <select id="task-project">
+            <option value="Inbox">Inbox</option>
+          </select>
+        </div>
+
         <button type="submit" id="confirm-new-task">Add Task</button>
         <button type="reset" id="cancel-new-task">Cancel</button>
       </form>

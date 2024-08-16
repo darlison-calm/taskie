@@ -7,16 +7,22 @@ export const taskManager = (function() {
 
   const addTask = (task) => {
     tasksList.push(task);
-    PubSub.publish(EVENTS.TASK_LIST_UPDATE, taskManager.getTasks())
+    PubSub.publish(EVENTS.TASK_LIST_UPDATE, getTasks())
   }
 
   const getTasks = () => {
     return tasksList
   }
 
-  const deleteTask = (index) => {
-    tasksList.splice(index, 1)
-    PubSub.publish(EVENTS.TASK_LIST_UPDATE, taskManager.getTasks())
+  const deleteTask = (taskId) => {
+    const index = tasksList.findIndex(task => task.id === taskId);
+    
+    if (index !== -1) {
+      tasksList.splice(index, 1);    
+      PubSub.publish(EVENTS.TASK_LIST_UPDATE, getTasks());
+    } else {
+        console.error(`Task with id ${taskId} not found.`);
+    }
   }
 
   return {
@@ -28,17 +34,23 @@ export const taskManager = (function() {
 })()
 
 export class Task {
-  constructor(title, dueDate = '', priority = '', description, complete = false) {
+  constructor(title, dueDate = '', priority = '', description, projectId) {
     this._title = title;
     this._dueDate = dueDate;
     this._priority = priority;
     this._description = description;
-    this._complete = complete;
-    this._projectId = ''
+    this._complete = false;
+    this._projectId = projectId;
+    this._id = Task.generateId()
+  }
+  static taskId = 0
+
+  static generateId() {
+    return Task.taskId++;
   }
 
   get id() {
-    return this._id;
+    return this._id
   }
 
   get title() {
@@ -77,16 +89,16 @@ export class Task {
     return this._complete;
   }
 
-  toogleComplete() {
+  toggleComplete() {
     this._complete = !this._complete
   }
 
   get projectId() {
-    return this._projectId 
+    return this._projectId;
   }
 
   set projectId(value) {
-    this._projectId = value
+    this._projectId = value;
   }
 }
 
