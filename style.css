@@ -83,7 +83,7 @@
   background-color: var(--secondary-dark);
 }
 
-.button-nav {
+.button-nav-tasks {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -104,8 +104,13 @@
   
   & .btn-projects {
     color: white;
-    margin: var(--margin-xs) var(--margin-xs);
+    margin: var(--margin-xxs) var(--margin-xxs);
     font-size: 1.2rem;
+    border-radius: 4px;
+  }
+
+  & .btn-projects:hover {
+    background-color: var(--secondary-dark);
   }
 }
 
