@@ -1,7 +1,6 @@
 import PubSub from "./utils/pubsub";
 import { Task } from "./task-factory";
 import { EVENTS } from "./utils/constants";
-import { populateSelect } from "./UI";
 export const taskForm = {
 
   setupAddTaskEventListener() {

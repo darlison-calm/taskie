@@ -1,8 +1,4 @@
-import PubSub from "./utils/pubsub"
-import { EVENTS } from "./utils/constants"
-import { displayProjectList, populateSelectProject } from "./UI"
-
-const projectsManager = (function() {
+export const projectsManager = (function() {
   const projects = ['Inbox']
 
   const addProject = (project) => {
@@ -12,7 +8,6 @@ const projectsManager = (function() {
       return
     }
     projects.push(project)
-    PubSub.publish(EVENTS.PROJECT_LIST_UPDATE , getProjects())
   }
   
   const deleteProject = (index) => projects.splice(index, 1)
@@ -26,10 +21,6 @@ const projectsManager = (function() {
   }
 })()
 
-export function subscribeToProjectEvents() {
-  PubSub.subscribe(EVENTS.PROJECT_ADDED, projectsManager.addProject)
-  PubSub.subscribe(EVENTS.PROJECT_LIST_UPDATE, displayProjectList)
-  PubSub.subscribe(EVENTS.PROJECT_LIST_UPDATE, populateSelectProject)
-}
+
 
 

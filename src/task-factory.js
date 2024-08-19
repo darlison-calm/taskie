@@ -1,13 +1,8 @@
-import PubSub from "./utils/pubsub";
-import { EVENTS } from "./utils/constants";
-import { displayAllTasks} from "./UI";
-
 export const taskManager = (function() {
   const tasksList = []
 
   const addTask = (task) => {
     tasksList.push(task);
-    PubSub.publish(EVENTS.TASK_LIST_UPDATE, getTasks())
   }
 
   const getTasks = () => {
@@ -19,7 +14,6 @@ export const taskManager = (function() {
     
     if (index !== -1) {
       tasksList.splice(index, 1);    
-      PubSub.publish(EVENTS.TASK_LIST_UPDATE, getTasks());
     } else {
         console.error(`Task with id ${taskId} not found.`);
     }
@@ -102,9 +96,6 @@ export class Task {
   }
 }
 
-export function subscribeToInitialTaskEvents() {
-  PubSub.subscribe(EVENTS.TASK_ADDED, taskManager.addTask)
-  PubSub.subscribe(EVENTS.TASK_LIST_UPDATE, displayAllTasks)
-  PubSub.subscribe(EVENTS.TASK_DELETED, taskManager.deleteTask)
-}
+
+
 
