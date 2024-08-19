@@ -3,5 +3,5 @@ export const EVENTS = {
   PROJECT_LIST_UPDATE: 'Project list update',
   TASK_ADDED : 'A task was added',
   TASK_LIST_UPDATE : 'Task list update',
-  TASK_DELETED : 'A task was deleted'
+  TASK_DELETED : 'A task was deleted',
 }

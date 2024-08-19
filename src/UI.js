@@ -2,6 +2,7 @@ import Pubsub from "./utils/pubsub"
 import { EVENTS } from "./utils/constants";
 import { addDomElement } from "./utils/addDomElement";
 import { isSameDay, isSameWeek, format} from "date-fns";
+import { taskManager } from "./task-factory";
 
 export function displayProjectList(projects) {
   const projectsContainer = document.getElementById("projects-container");
@@ -21,6 +22,8 @@ export function displayProjectList(projects) {
    
     projectItem.addEventListener('click', (e) => {
       manageActiveBtnStyle(e.target)
+      const projectIndex = e.target.getAttribute('data-index')
+      displayProjectTasks(taskManager.getTasks(), projectIndex)
     })
 
     projectsContainer.append(projectItem);
@@ -131,22 +134,16 @@ function clearTaskContainer(){
 
 export function displayAllTasks(tasks) {
   const list = clearTaskContainer()
-  
-  tasks.forEach(task => {
-   displayTask(task, list)
-  })
+  tasks.forEach(task => displayTask(task, list))
 }
 
 function displayTasksBasedOnDate(tasks, conditionFn) {
   const today = new Date();
   const todaysString = format(today, 'yyyy-MM-dd');
   const list = clearTaskContainer()
-
-  tasks.forEach((task) => {
-    if (conditionFn(todaysString, task.dueDate)) {
-      displayTask(task, list);
-    }
-  });
+  
+  const filterTasks = tasks.filter((task) => conditionFn(todaysString, task.dueDate))
+  filterTasks.forEach(task => displayTask(task, list))
 }
 
 export function displayTodaysTasks(tasks) {
@@ -161,12 +158,9 @@ export function displayWeekTasks(tasks) {
 
 export function displayProjectTasks(tasks, projectName) {
   const list = clearTaskContainer()
+  const filterTasks = tasks.filter(task => task.projectId === projectName)
   
-  tasks.forEach((task) => {
-    if (task.projectId === projectName) {
-      displayTask(task, list);
-    }
-  });
+  filterTasks.forEach(task => displayTask(task, list))
 }
 
 export function manageActiveBtnStyle(button) {

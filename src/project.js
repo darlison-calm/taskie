@@ -26,7 +26,7 @@ const projectsManager = (function() {
   }
 })()
 
-export function subscribeToProjectEvents(){
+export function subscribeToProjectEvents() {
   PubSub.subscribe(EVENTS.PROJECT_ADDED, projectsManager.addProject)
   PubSub.subscribe(EVENTS.PROJECT_LIST_UPDATE, displayProjectList)
   PubSub.subscribe(EVENTS.PROJECT_LIST_UPDATE, populateSelectProject)

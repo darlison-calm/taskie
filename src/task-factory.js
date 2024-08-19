@@ -102,7 +102,7 @@ export class Task {
   }
 }
 
-export function subscribeToInitialTaskEvents(){
+export function subscribeToInitialTaskEvents() {
   PubSub.subscribe(EVENTS.TASK_ADDED, taskManager.addTask)
   PubSub.subscribe(EVENTS.TASK_LIST_UPDATE, displayAllTasks)
   PubSub.subscribe(EVENTS.TASK_DELETED, taskManager.deleteTask)
