@@ -14,11 +14,16 @@ export const taskForm = {
       document.getElementById('task-date').valueAsDate = new Date();
     })
 
-    form.querySelector('#cancel-new-task').addEventListener('click', () => taskModal.close())
+    form.querySelector('#cancel-new-task').addEventListener('click', () => {
+      taskModal.close();
+      form.reset
+    })
+
     form.addEventListener('submit', (e) => {
-      e.preventDefault()
-      taskForm.add()
-      taskModal.close()
+      e.preventDefault();
+      taskForm.add();
+      taskModal.close();
+      form.reset();
     })
   },
 

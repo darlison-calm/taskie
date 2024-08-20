@@ -63,10 +63,17 @@
       <dialog close id="project-dialog">
               
         <form id="project-form">   
-          <label for="project-name">Project Name: </p>   
-          <input type="text" id="project-name" name="project-name" maxlength="20" required>
-          <button type="submit" id="confirm">Confirm</button>  
-          <button id="cancel" type="reset">Cancel</button>
+          <div>
+            <label for="project-name">Project Name: </p>
+            <input type="text" required id="project-name" name="project-name" maxlength="20">
+          </div>
+          <div>
+            <button type="submit" id="confirm">Confirm</button>
+            <button id="cancel" type="reset">Cancel</button>
+          </div>
+          <div id="error">
+
+          </div>
         </form>
       
       </dialog>

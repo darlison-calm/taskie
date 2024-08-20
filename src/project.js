@@ -1,13 +1,18 @@
 export const projectsManager = (function() {
   const projects = ['Inbox']
 
+  let currentProject = projects[0]
+
   const addProject = (project) => {
-    const alreadyExist = projects.some(pro => pro === project)
-    if (alreadyExist) {
-      alert('project already exist')
-      return
-    }
     projects.push(project)
+  }
+
+  const getCurrentProject = () => {
+    return currentProject
+  }
+
+  const setCurrentProject = (id) => {
+    currentProject = id
   }
   
   const deleteProject = (index) => projects.splice(index, 1)
@@ -17,7 +22,9 @@ export const projectsManager = (function() {
   return {
     addProject,
     deleteProject,
-    getProjects
+    getProjects,
+    getCurrentProject,
+    setCurrentProject
   }
 })()
 

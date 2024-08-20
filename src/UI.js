@@ -1,8 +1,9 @@
 import Pubsub from "./utils/pubsub"
 import { EVENTS } from "./utils/constants";
 import { addDomElement } from "./utils/addDomElement";
-import { isSameDay, isSameWeek, format} from "date-fns";
+import { format} from "date-fns";
 import { taskManager } from "./task-factory";
+import { projectsManager } from "./project";
 
 export function displayProjectList(projects) {
   const projectsContainer = document.getElementById("projects-container");
@@ -19,11 +20,12 @@ export function displayProjectList(projects) {
         'data-index': pro
       }
     });
-   
+    
     projectItem.addEventListener('click', (e) => {
       manageActiveBtnStyle(e.target)
-      const projectIndex = e.target.getAttribute('data-index')
-      displayProjectTasks(taskManager.getTasks(), projectIndex)
+      const projectName = e.target.getAttribute('data-index')
+      projectsManager.setCurrentProject(projectName)
+      displayTasks(taskManager.getTasksByProjectId(projectsManager.getCurrentProject()))
     })
 
     projectsContainer.append(projectItem);
@@ -126,40 +128,15 @@ function displayTask(task, tasksContainer) {
   tasksContainer.appendChild(itemTask)
 }
 
-function clearTaskContainer(){
+export function displayTasks(tasks) {
   const list = document.querySelector('#task-list');
-  list.innerHTML = ''
-  return list
-}
-
-export function displayAllTasks(tasks) {
-  const list = clearTaskContainer()
+  list.innerHTML = '' 
   tasks.forEach(task => displayTask(task, list))
-}
-
-function displayTasksBasedOnDate(tasks, conditionFn) {
-  const today = new Date();
-  const todaysString = format(today, 'yyyy-MM-dd');
-  const list = clearTaskContainer()
-  
-  const filterTasks = tasks.filter((task) => conditionFn(todaysString, task.dueDate))
-  filterTasks.forEach(task => displayTask(task, list))
-}
-
-export function displayTodaysTasks(tasks) {
-  const isToday = (todaysString, dueDate) => isSameDay(todaysString, dueDate);
-  displayTasksBasedOnDate(tasks, isToday);
-}
-
-export function displayWeekTasks(tasks) {
-  const isThisWeek = (todaysString, dueDate) => isSameWeek(todaysString, dueDate);
-  displayTasksBasedOnDate(tasks, isThisWeek);
 }
 
 export function displayProjectTasks(tasks, projectName) {
   const list = clearTaskContainer()
   const filterTasks = tasks.filter(task => task.projectId === projectName)
-  
   filterTasks.forEach(task => displayTask(task, list))
 }
 

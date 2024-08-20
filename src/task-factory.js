@@ -1,31 +1,5 @@
-export const taskManager = (function() {
-  const tasksList = []
-
-  const addTask = (task) => {
-    tasksList.push(task);
-  }
-
-  const getTasks = () => {
-    return tasksList
-  }
-
-  const deleteTask = (taskId) => {
-    const index = tasksList.findIndex(task => task.id === taskId);
-    
-    if (index !== -1) {
-      tasksList.splice(index, 1);    
-    } else {
-        console.error(`Task with id ${taskId} not found.`);
-    }
-  }
-
-  return {
-    addTask,
-    getTasks,
-    deleteTask
-  }
-
-})()
+import { isSameDay, isSameWeek } from "date-fns";
+import { checkMatchingDate } from "./application";
 
 export class Task {
   constructor(title, dueDate = '', priority = '', description, projectId) {
@@ -95,6 +69,54 @@ export class Task {
     this._projectId = value;
   }
 }
+
+export const taskManager = (function() {
+  const tasksList = []
+
+  const addTask = (task) => {
+    tasksList.push(task);
+  }
+
+  const getAllTasks = () => {
+    return tasksList
+  }
+
+  const getTasksByProjectId = (projectId) => {
+    const tasks = getAllTasks()
+    
+    if (projectId === 'Today') {
+      return tasks.filter(task => checkMatchingDate(task.dueDate, isSameDay))
+    } 
+    else if (projectId === 'Week') {
+      return tasks.filter(task => checkMatchingDate(task.dueDate, isSameWeek))
+    } 
+    else {
+      return tasks.filter(task => task.projectId === projectId)
+    }
+  }
+
+  const deleteTask = (taskId) => {
+    const index = tasksList.findIndex(task => task.id === taskId);
+    
+    if (index !== -1) {
+      tasksList.splice(index, 1);    
+    } else {
+        console.error(`Task with id ${taskId} not found.`);
+    }
+  }
+
+  return {
+    addTask,
+    getAllTasks,
+    deleteTask,
+    getTasksByProjectId
+  }
+
+})()
+
+
+
+
 
 
 
