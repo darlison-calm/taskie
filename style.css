@@ -13,6 +13,10 @@
     padding: 0;
   }
 
+  li {
+    list-style: none;
+  }
+
   body {
     word-wrap: break-word;
     min-height: 100vh;
@@ -22,13 +26,13 @@
   :root {
     font-size: 15px;
     
-    --ff: "Inter", sans-serif;
+    --ff: "Quicksand", sans-serif;
     --primary-dark: #000814;
-    --secondary-dark: #001D3D;
+    --secondary-dark: #001d3d;
     --primary-special-color: #FFC300;
     --primary-light: #eee;
     --secondary-light: #c7c7c7;
-
+    --new-light: #f8f9fa;
     --margin-xxs: .25rem;
     --margin-xs: .5rem;
     --margin-s: .75rem;
@@ -43,11 +47,15 @@
     cursor: pointer;
     border: none;
   }
+span {
+  font-family: "Quicksand", sans-serif;
+}
   
 .content {
     display: grid;
     grid-template-columns: 1fr 7fr;
     min-height: 100vh;
+    font-family: var(--ff);
   }
 
 .sidebar {
@@ -114,54 +122,10 @@
   }
 }
 
-.task-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  padding: var(--margin-l) var(--margin-l);
-  gap: 8px;
+.btn-delete {
+  color: var(--primary-light);
+  margin: 0px 16px;
 }
-
-.task-item {
-  border: 2px solid var(--primary-light);
-  display: flex;
-  & input {
-    align-self: flex-start;
-  }
-}
-
-.task-info {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  width: 100%;
-}
-
-.title-btn-container {
-  display: flex;
-  justify-content: space-between;
-}
-
-.task-priority-date {
-  margin-top: var(--margin-s);
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  height: 60%;
-  padding-right: 8px;
-}
-
-.task-title {
-  font-size: 1.2rem;
-}
-
-.title-btn-container {
-  display: flex;
-  justify-content: space-between;
-  padding-right: 8px;
-  width: 100%;
-}
-
-
 .material-symbols-outlined {
   font-variation-settings:
   'FILL' 0,
@@ -175,9 +139,49 @@
   font-weight: bolder;
 }
 
+.task-list {
+  display: flex;
+  flex-direction: column;
+  margin: var(--margin-xs) var(--margin-xl);
+}
 
+.list-group-item {
+  color: aliceblue;
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin: var(--margin-xxs) 0px;
+  border-bottom: 1px solid var(--primary-dark);
+  padding: 6px 0px;
+}
 
+h6 {
+  font-size: 1.2rem;
+  line-height: 1.1;
+  font-weight: lighter;
+}
 
+.d-flex {
+  display: flex;
+}
 
+.task-priority, .task-due-date, .task-projectId {
+  font-size: 0.9rem;
+  margin-right: var(--margin-s);
+}
+
+.task-description {
+  font-size: 1rem;
+}
+
+/* <uniquifier>: Use a unique and descriptive class name
+<weight>: Use a value from 300 to 700 */
+
+.quicksand-font {
+
+  font-optical-sizing: auto;
+  font-weight: 300;;
+  font-style: normal;
+}
 
   

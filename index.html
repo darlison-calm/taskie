@@ -6,6 +6,9 @@
   <title>ToDoList</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
 </head>
 <body>
     
@@ -14,7 +17,7 @@
         <div class="sidebar-nav">
 
           <div class="nav-item">
-              <button class="button-nav button-nav-tasks" id="add-task">
+              <button class="button-nav button-nav-tasks " id="add-task">
                 <span class="material-symbols-outlined">add_circle </span>
                 <span>Add Task</span>
               </button>
@@ -56,7 +59,7 @@
       </div>
       
       <div class="tasks-container">
-        <div class="task-grid" id="task-list"></div>
+        <ul class="task-list" id="task-list"></ul>
       </div>
     
     </main>
@@ -98,9 +101,9 @@
         <div class="input-container">
           <label for="task-priority">Priority: </label>
           <select id="task-priority" required>
-            <option value="High">High</option>
-            <option value="Medium">Medium</option>
-            <option value="Low">Low</option>
+            <option value="High">HIGH</option>
+            <option value="Medium">MEDIUM</option>
+            <option value="Low">LOW</option>
           </select>
         </div>
 
