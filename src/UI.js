@@ -33,98 +33,108 @@ export function displayProjectList(projects) {
 }
 
 function displayTask(task, tasksContainer) {
+  
   const itemTask = addDomElement({
-    tag: 'div',
-    className: 'task-item',
-  })
-
-  const taskInfo = addDomElement({
-    tag: 'div',
-    className: 'task-info',
+    tag: 'li',
+    className: 'list-group-item',
   })
 
   const checkbox = addDomElement({
     tag: 'input',
     attr: {
-      type: 'checkbox'
+      type: 'checkbox',
+      name: 'task-status'
     }
   })
-
-  checkbox.addEventListener('click', () => {
-    task.toggleComplete()
-    if(task.complete === true) {
+  
+  checkbox.addEventListener('change', function() {
+    if (this.checked) {
+      task.toggleComplete()
       title.classList.add("completed")
-      return
+    } else {
+      task.toggleComplete()
+      title.classList.remove("completed")
     }
-    title.classList.remove("completed")
   })
-
-  const divTitleAnBtn = addDomElement({
-    tag : 'div',
-    className : 'title-btn-container'
+  
+  const taskDeatils = addDomElement({
+    tag: 'div',
+    className: 'task-details',
   })
 
   const title = addDomElement({
-    tag: 'div',
-    className: 'task-title',
-    textContent: task.title,
+    tag: 'h6',
+    className: task.complete ? 'completed' : '',
+    textContent: task.title
+  })
+
+  const description = addDomElement({
+    tag: 'p',
+    className: 'task-description',
+    textContent: task.description, 
   })
 
   const btnDelete = addDomElement({
     tag : 'button',
     className: 'btn-delete',
-    textContent: "DELETE",
+    textContent: "DEL",
     attr: {
       'data-id' : task.id,
+      'title': 'Delete Task'
     }
   })
- 
+
   btnDelete.addEventListener('click', (e) => {
     const index = Number(e.target.dataset.id)
     Pubsub.publish(EVENTS.TASK_DELETED, index)
   })
 
-  divTitleAnBtn.appendChild(title);
-  divTitleAnBtn.appendChild(btnDelete)
-
-  const description = addDomElement({
-    tag: 'span',
-    className: 'task-description',
-    textContent: task.description, 
-  })
-
-  const divzz = addDomElement({
-    tag: 'div',
-    className: 'task-priority-date'
-  })
-
-  const projectId = addDomElement({
-    tag: 'span',
+  const project = addDomElement({
+    tag: 'p',
     className: 'task-projectId',
     textContent: task.projectId
   })
 
   const priority = addDomElement({
-    tag: 'span',
+    tag: 'p',
     className: 'task-priority',
     textContent: task.priority
   })
 
   const dateString = new Date(task.dueDate.replace(/-/g, '/'))
+  
   const date = addDomElement({
-    tag: 'span',
-    className: 'task-date',
+    tag: 'p',
+    className: 'task-due-date',
     textContent: format(dateString, 'MMMM d, yyyy')
   })
-  divzz.appendChild(date)
-  divzz.appendChild(priority)
-  divzz.appendChild(projectId)
-  taskInfo.appendChild(divTitleAnBtn)
-  taskInfo.appendChild(description)
-  taskInfo.appendChild(divzz)
-  itemTask.appendChild(checkbox)
-  itemTask.appendChild(taskInfo)
 
+  const divFlex = addDomElement({
+    tag: 'div',
+    className: 'd-flex'
+  }) 
+
+  const divFlexSecond = addDomElement({
+    tag: 'div',
+    className: 'd-flex'
+  })
+  
+  checkbox.checked = task.complete
+
+  itemTask.appendChild(checkbox)
+  
+  divFlex.appendChild(title)
+  divFlex.appendChild(btnDelete)
+
+  divFlexSecond.appendChild(date)
+  divFlexSecond.appendChild(priority)
+  divFlexSecond.appendChild(project)
+  
+  taskDeatils.appendChild(divFlex)
+  taskDeatils.appendChild(description)
+  taskDeatils.appendChild(divFlexSecond)
+  
+  itemTask.appendChild(taskDeatils)
   tasksContainer.appendChild(itemTask)
 }
 
@@ -132,12 +142,6 @@ export function displayTasks(tasks) {
   const list = document.querySelector('#task-list');
   list.innerHTML = '' 
   tasks.forEach(task => displayTask(task, list))
-}
-
-export function displayProjectTasks(tasks, projectName) {
-  const list = clearTaskContainer()
-  const filterTasks = tasks.filter(task => task.projectId === projectName)
-  filterTasks.forEach(task => displayTask(task, list))
 }
 
 export function manageActiveBtnStyle(button) {
@@ -161,5 +165,3 @@ export function populateSelectProject(items) {
     select.appendChild(option)
   })
 }
-
-
