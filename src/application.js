@@ -46,7 +46,6 @@ export function subscribeToInitialTaskEvents() {
 export function subscribeToProjectEvents() {
   PubSub.subscribe(EVENTS.PROJECT_ADDED, createProject)
   PubSub.subscribe(EVENTS.PROJECT_LIST_UPDATE, displayProjectList)
-  PubSub.subscribe(EVENTS.PROJECT_LIST_UPDATE, populateSelectProject)
 }
 
 export function checkMatchingDate(taskDueDate, conditionFn) {

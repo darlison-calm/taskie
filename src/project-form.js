@@ -19,7 +19,7 @@ export const projectForm = {
     
     form.addEventListener('submit', (ev) => {
       const title = document.querySelector('#project-name').value   
-      if (isProjectAlreadyAdded(title)){
+      if (isProjectAlreadyAdded(title)) {
         ev.preventDefault()
         errorElement.textContent = 'Project already added'
         return

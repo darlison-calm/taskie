@@ -1,6 +1,8 @@
 import PubSub from "./utils/pubsub";
 import { Task } from "./task-factory";
 import { EVENTS } from "./utils/constants";
+import { populateSelectProject } from "./UI";
+
 export const taskForm = {
 
   setupAddTaskEventListener() {
@@ -9,9 +11,9 @@ export const taskForm = {
     const form = document.getElementById('task-form') 
     
     addTaskBtn.addEventListener('click', () => {
+      populateSelectProject('task-project')
+      
       taskModal.showModal();
-      //set date placeholder to today's date  
-      document.getElementById('task-date').valueAsDate = new Date();
     })
 
     form.querySelector('#cancel-new-task').addEventListener('click', () => {

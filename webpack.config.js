@@ -7,4 +7,8 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
   },
   devtool: 'eval-source-map',
+  module: {
+    rules: [
+    ],
+  },
 };

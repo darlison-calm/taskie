@@ -17,7 +17,8 @@ export function displayProjectList(projects) {
       textContent: pro,
       className: 'btn-projects',
       attr: {
-        'data-index': pro
+        'data-index': pro,
+        'title': pro
       }
     });
     
@@ -41,6 +42,7 @@ function displayTask(task, tasksContainer) {
 
   const checkbox = addDomElement({
     tag: 'input',
+    className: 'input-checkbox',
     attr: {
       type: 'checkbox',
       name: 'task-status'
@@ -48,13 +50,7 @@ function displayTask(task, tasksContainer) {
   })
   
   checkbox.addEventListener('change', function() {
-    if (this.checked) {
-      task.toggleComplete()
-      title.classList.add("completed")
-    } else {
-      task.toggleComplete()
-      title.classList.remove("completed")
-    }
+    updateTaskCompletion(this.checked, task, title, btnEditIcon, priority, date, description);
   })
   
   const taskDeatils = addDomElement({
@@ -74,31 +70,55 @@ function displayTask(task, tasksContainer) {
     textContent: task.description, 
   })
 
+  const taskButtons = addDomElement({
+    tag: 'div'
+  })
+
   const btnDelete = addDomElement({
-    tag : 'button',
-    className: 'btn-delete',
-    textContent: "DEL",
+    tag: 'button',
+    className: 'btn-delete-task',
     attr: {
-      'data-id' : task.id,
       'title': 'Delete Task'
     }
-  })
+  });
+ 
+  const btnDeleteIcon = addDomElement({
+    tag: 'i',
+    className: ["fa-solid", "fa-xmark", "fa-lg"],
+    attr: {
+      'data-id': task.id
+    }
+  });
+
+  btnDelete.appendChild(btnDeleteIcon);  
 
   btnDelete.addEventListener('click', (e) => {
     const index = Number(e.target.dataset.id)
     Pubsub.publish(EVENTS.TASK_DELETED, index)
   })
 
-  const project = addDomElement({
-    tag: 'p',
-    className: 'task-projectId',
-    textContent: task.projectId
+  const btnEdit = addDomElement({
+    tag : 'button',
+    className: 'btn-edit-task',
+    attr : {
+      'title' : 'Edit task'
+    }
   })
+
+  const btnEditIcon = addDomElement({
+    tag: 'i',
+    className : ['fa-solid', 'fa-pen-to-square', 'fa-lg'],
+    attr : {
+      'data-id' : task.id
+    }
+  })
+  
+  btnEdit.appendChild(btnEditIcon);
 
   const priority = addDomElement({
     tag: 'p',
     className: 'task-priority',
-    textContent: task.priority
+    textContent: `Priority: ${task.priority}`
   })
 
   const dateString = new Date(task.dueDate.replace(/-/g, '/'))
@@ -106,7 +126,7 @@ function displayTask(task, tasksContainer) {
   const date = addDomElement({
     tag: 'p',
     className: 'task-due-date',
-    textContent: format(dateString, 'MMMM d, yyyy')
+    textContent: `Due date: ${format(dateString, 'MMM d, yyyy')}`
   })
 
   const divFlex = addDomElement({
@@ -121,14 +141,17 @@ function displayTask(task, tasksContainer) {
   
   checkbox.checked = task.complete
 
+
   itemTask.appendChild(checkbox)
+
+  taskButtons.appendChild(btnEdit)
+  taskButtons.appendChild(btnDelete)
   
   divFlex.appendChild(title)
-  divFlex.appendChild(btnDelete)
+  divFlex.appendChild(taskButtons)
 
   divFlexSecond.appendChild(date)
   divFlexSecond.appendChild(priority)
-  divFlexSecond.appendChild(project)
   
   taskDeatils.appendChild(divFlex)
   taskDeatils.appendChild(description)
@@ -150,10 +173,11 @@ export function manageActiveBtnStyle(button) {
   button.classList.add('button-active')
 }
 
-export function populateSelectProject(items) {
-  const select = document.getElementById('task-project');
+export function populateSelectProject(container) {
+  const select = document.getElementById(container);
   select.innerHTML = ''
 
+  const items = projectsManager.getProjects()
   items.forEach(item => {
     const option = addDomElement({
       tag : 'option',
@@ -163,5 +187,17 @@ export function populateSelectProject(items) {
       }
     })
     select.appendChild(option)
+  })
+}
+
+function updateTaskCompletion(isChecked, task, ...elements) {
+  task.toggleComplete()
+
+  elements.forEach(e => {
+    if (isChecked) {
+      e.classList.add('completed')
+    } else {
+      e.classList.remove('completed')
+    }
   })
 }
