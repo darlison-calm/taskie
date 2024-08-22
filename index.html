@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/8281d54d4e.js" crossorigin="anonymous"></script>
 </head>
 <body>
     
@@ -53,8 +54,10 @@
               </button>
             </div>
         </div>
-        <div class="projects-container" id="projects-container">
-          
+        
+        <div class="projects-section" id="projects-section" title="projects-section">
+          <p  class="my-projects">My Projects</p>
+          <div class="projects-container" id="projects-container"></div>
         </div>
       </div>
       
@@ -95,15 +98,15 @@
 
         <div class="input-container">
           <label for="task-date">Due Date</label>
-          <input type="date" id="task-date" value="" min="2024-08-08" max="2100-01-01">
+          <input type="date" id="task-date" value="" required max="9999-12-31">
         </div>
       
         <div class="input-container">
           <label for="task-priority">Priority: </label>
           <select id="task-priority" required>
-            <option value="High">HIGH</option>
-            <option value="Medium">MEDIUM</option>
-            <option value="Low">LOW</option>
+            <option value="HIGH">High</option>
+            <option value="MEDIUM">Medium</option>
+            <option value="LOW">Low</option>
           </select>
         </div>
 
@@ -118,6 +121,11 @@
         <button type="reset" id="cancel-new-task">Cancel</button>
       </form>
     </dialog>
+    <p  id="linep" style="text-decoration:line-through;color:red">
+      <span style="color:#ffffff">
+        
+      </span>
+    </p>
     
   <script src="main.js"></script>
 </body>

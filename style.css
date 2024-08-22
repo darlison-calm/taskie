@@ -101,19 +101,30 @@ span {
 
 .completed {
   text-decoration: line-through;
+  color: #01050f !important;
+}
+
+.projects-section{
+  border-top: 2px solid var(--primary-special-color);
+  
+  margin: var(--margin-xs) var(--margin-s);
+  & p {
+    font-weight: 580;
+    color: white;
+    font-size: 1.2em;
+  }
 }
 
 .projects-container {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  border-top: 2px solid var(--primary-special-color);
-  margin: var(--margin-xs) var(--margin-xs);
-  
+  align-items: flex-start;  
+ 
   & .btn-projects {
+     font-family: var(--ff);
     color: white;
     margin: var(--margin-xxs) var(--margin-xxs);
-    font-size: 1.2rem;
+    font-size: 1.1em;
     border-radius: 4px;
   }
 
@@ -122,7 +133,7 @@ span {
   }
 }
 
-.btn-delete {
+.btn-delete-task {
   color: var(--primary-light);
   margin: 0px 16px;
 }
@@ -157,15 +168,16 @@ span {
 
 h6 {
   font-size: 1.2rem;
-  line-height: 1.1;
+  line-height: 1;
   font-weight: lighter;
 }
 
 .d-flex {
   display: flex;
+  justify-content: space-between;
 }
 
-.task-priority, .task-due-date, .task-projectId {
+.task-priority, .task-due-date {
   font-size: 0.9rem;
   margin-right: var(--margin-s);
 }
@@ -174,14 +186,42 @@ h6 {
   font-size: 1rem;
 }
 
+.input-checkbox {
+  margin-right: var(--margin-m);
+}
+
+input[type=checkbox] {
+  transform: scale(1.4);
+}
+
+.fa-xmark {
+  transition: scale 0.1s ease;
+}
+.fa-xmark:hover {
+  scale: 1.3;
+  color: salmon;
+}
+
+.task-edit-delete {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.fa-pen-to-square {
+  transition: scale 0.1s ease;
+  color: white;
+}
+
+.fa-pen-to-square:hover {
+  scale: 1.3;
+}
+
+
+
+.fa-lg {
+  font-size: 1.2em;
+}
 /* <uniquifier>: Use a unique and descriptive class name
 <weight>: Use a value from 300 to 700 */
-
-.quicksand-font {
-
-  font-optical-sizing: auto;
-  font-weight: 300;;
-  font-style: normal;
-}
 
   
