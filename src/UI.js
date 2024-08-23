@@ -218,8 +218,9 @@ function handleTaskEditClick(task, taskId) {
     '#update-task-description' : task.description,
     '#update-task-due-date' : task.dueDate,
     '#update-task-priority' : task.priority,
-    '#update-task-project' : task.projectID,
+    '#update-task-project' : task.projectId,
   })
+  
   populateSelectProject('update-task-project')
 
   updateTaskModal.showModal();
