@@ -66,8 +66,8 @@
       </div>
     
     </main>
-      <dialog close id="project-dialog">
-              
+     <!-- Add project modal -->
+      <dialog close id="project-dialog">    
         <form id="project-form">   
           <div>
             <label for="project-name">Project Name: </p>
@@ -83,9 +83,10 @@
         </form>
       
       </dialog>
+
+    <!-- Add task modal -->
     <dialog close id="task-dialog">
       <form action="#" method="dialog" id="task-form">
-        
         <div class="input-container">
           <label for="task-title">Title</label>
           <input type="text" id="task-title" placeholder="Title" required maxlength="30">
@@ -121,12 +122,47 @@
         <button type="reset" id="cancel-new-task">Cancel</button>
       </form>
     </dialog>
-    <p  id="linep" style="text-decoration:line-through;color:red">
-      <span style="color:#ffffff">
+
+     <!-- Add Edit Task Modal -->
+    <dialog close id="update-task-dialog">
+      <form action="#" id="update-task-form">
+        <div class="input-container">
+          <label for="update-task-title">Title</label>
+          <input type="text" id="update-task-title" placeholder="Title" required maxlength="30">
+        </div>        
         
-      </span>
-    </p>
-    
+        <div class="input-container">
+          <label for="update-task-description">Details(optional)</label>
+          <input type="text" id="update-task-description" placeholder="description" maxlength="150">
+        </div>
+
+        <div class="input-container">
+          <label for="update-task-due-date">Due Date</label>
+          <input type="date" id="update-task-due-date" value="" required max="9999-12-30">
+        </div>
+      
+        <div class="input-container">
+          <label for="update-task-priority">Priority: </label>
+          <select id="update-task-priority" required>
+            <option value="HIGH">High</option>
+            <option value="MEDIUM">Medium</option>
+            <option value="LOW">Low</option>
+          </select>
+        </div>
+
+        <div class="input-container">
+          <label for="update-task-project">Project: </label>
+          <select id="update-task-project">
+            <option value="Inbox">Inbox</option>
+          </select>
+        </div>
+
+        <button type="submit" id="confirm-update-task">Update Task</button>
+        <button type="reset" id="cancel-task-update">Cancel</button>
+      </form>
+
+    </dialog>
+
   <script src="main.js"></script>
 </body>
 
