@@ -213,28 +213,18 @@ function handleTaskEditClick(task, taskId) {
   const updateTaskModal = document.querySelector('#update-task-dialog') 
   let updateTaskForm = document.getElementById('update-task-form')
 
-  if (!updateTaskModal || !updateTaskForm) {
-    console.error('Modal or form element not found.');
-    return;
-  }
-  
-  const newUpdateForm = updateTaskForm.cloneNode(true)
-
-  updateTaskForm.parentNode.replaceChild(newUpdateForm, updateTaskForm);
-
-  updateTaskForm = newUpdateForm
-    populateForm(updateTaskForm, {
-      '#update-task-title' : task.title,
-      '#update-task-description' : task.description,
-      '#update-task-due-date' : task.dueDate,
-      '#update-task-priority' : task.priority,
-      '#update-task-project' : task.projectID,
-    })
+  populateForm(updateTaskForm, {
+    '#update-task-title' : task.title,
+    '#update-task-description' : task.description,
+    '#update-task-due-date' : task.dueDate,
+    '#update-task-priority' : task.priority,
+    '#update-task-project' : task.projectID,
+  })
   populateSelectProject('update-task-project')
 
   updateTaskModal.showModal();
   
-  updateTaskForm.addEventListener('submit', e => {
+  const updateFormHandler = e => {
     e.preventDefault()
     let title = document.querySelector('#update-task-title').value
     let description = document.querySelector('#update-task-description').value
@@ -246,15 +236,22 @@ function handleTaskEditClick(task, taskId) {
 
     editTask(newTask, taskId)
     updateTaskModal.close()
-  })
-
-  updateTaskForm.querySelector('#cancel-task-update').addEventListener('click', () => {
+  }
+ 
+  updateTaskForm.removeEventListener('submit' , updateFormHandler)
+  updateTaskForm.addEventListener('submit', updateFormHandler)
+  
+  const cancelHandler = () => {
     updateTaskModal.close()
-  })
+  }
+
+  const cancelButton = updateTaskForm.querySelector('#cancel-task-update')
+  cancelButton.removeEventListener('click', cancelHandler)
+  cancelButton.addEventListener('click', cancelHandler)
 }
 
 function populateForm (form, fieldValues) {
-  Object.entries(fieldValues).forEach(([selector, value]) => {
-    form.querySelector(selector).value = value
+  Object.entries(fieldValues).forEach(([key, value]) => {
+    form.querySelector(key).value = value
   })
 }
