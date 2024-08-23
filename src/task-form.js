@@ -12,7 +12,6 @@ export const taskForm = {
     
     addTaskBtn.addEventListener('click', () => {
       populateSelectProject('task-project')
-      
       taskModal.showModal();
     })
 

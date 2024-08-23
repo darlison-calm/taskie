@@ -4,4 +4,5 @@ export const EVENTS = {
   TASK_ADDED : 'A task was added',
   TASK_LIST_UPDATE : 'Task list update',
   TASK_DELETED : 'A task was deleted',
+  TASK_EDITED : 'A task was edited'
 }

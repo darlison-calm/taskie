@@ -2,12 +2,18 @@ import PubSub from "./utils/pubsub.js";
 import { EVENTS } from "./utils/constants.js";
 import { taskManager } from "./task-factory.js";
 import { projectsManager } from "./project.js";
-import { displayTasks, manageActiveBtnStyle, displayProjectList, populateSelectProject} from './UI.js';
+import { displayTasks, manageActiveBtnStyle, displayProjectList} from './UI.js';
 import { format } from "date-fns";
 
 function createTask(task) {
   const currentProject = projectsManager.getCurrentProject()
   taskManager.addTask(task)
+  PubSub.publish(EVENTS.TASK_LIST_UPDATE, taskManager.getTasksByProjectId(currentProject))
+}
+
+export function editTask(newTask, oldTaskId) {
+  const currentProject = projectsManager.getCurrentProject()
+  taskManager.editTask(newTask, oldTaskId)
   PubSub.publish(EVENTS.TASK_LIST_UPDATE, taskManager.getTasksByProjectId(currentProject))
 }
 

@@ -1,6 +1,72 @@
 import { isSameDay, isSameWeek } from "date-fns";
 import { checkMatchingDate } from "./application";
 
+export const taskManager = (function() {
+  const tasksList = []
+
+  const addTask = (task) => {
+    tasksList.push(task);
+  }
+
+  const getAllTasks = () => {
+    return tasksList
+  }
+
+  const getTasksByProjectId = (projectId) => {
+    let sortedTasks
+    if (projectId === 'Today') {
+      sortedTasks = tasksList.filter(task => checkMatchingDate(task.dueDate, isSameDay))
+      sortedTasks = changeOrderByComplete(sortedTasks)
+      return sortedTasks
+    } 
+    else if (projectId === 'Week') {
+      sortedTasks = tasksList.filter(task => checkMatchingDate(task.dueDate, isSameWeek))
+      sortedTasks = changeOrderByComplete(sortedTasks)
+      return sortedTasks
+    } 
+    else {
+      sortedTasks = tasksList.filter(task => task.projectId === projectId)
+      sortedTasks = changeOrderByComplete(sortedTasks)
+      return sortedTasks
+    }
+  }
+
+  const deleteTask = (taskId) => {
+    const index = tasksList.findIndex(task => task.id === taskId);
+    if (index !== -1) {
+      tasksList.splice(index, 1);    
+    } else {
+        console.error(`Task with id ${taskId} not found.`);
+    }
+  }
+
+  const getTaskById = (taskId) => {
+    const index = tasksList.findIndex(task => task.id === taskId);
+    return tasksList[index];
+  }
+
+  const editTask = (newTask, oldTaskId) => {
+    const index = tasksList.findIndex(task => task.id === oldTaskId);
+    tasksList[index] = newTask
+  }
+
+  const changeOrderByComplete = (tasks) => {
+    const uncompleted = tasks.filter(t => t.complete === false)
+    const completed = tasks.filter(t => t.complete === true)
+
+    return uncompleted.concat(completed)
+  }
+
+  return {
+    addTask,
+    getAllTasks,
+    deleteTask,
+    getTasksByProjectId,
+    getTaskById,
+    editTask
+  }
+})()
+
 export class Task {
   constructor(title, dueDate = '', priority = '', description, projectId) {
     this._title = title;
@@ -57,8 +123,8 @@ export class Task {
     return this._complete;
   }
 
-  toggleComplete() {
-    this._complete = !this._complete
+  set complete(value) {
+    this._complete = value
   }
 
   get projectId() {
@@ -69,55 +135,4 @@ export class Task {
     this._projectId = value;
   }
 }
-
-export const taskManager = (function() {
-  const tasksList = []
-
-  const addTask = (task) => {
-    tasksList.push(task);
-  }
-
-  const getAllTasks = () => {
-    return tasksList
-  }
-
-  const getTasksByProjectId = (projectId) => {
-    const tasks = getAllTasks()
-    
-    if (projectId === 'Today') {
-      return tasks.filter(task => checkMatchingDate(task.dueDate, isSameDay))
-    } 
-    else if (projectId === 'Week') {
-      return tasks.filter(task => checkMatchingDate(task.dueDate, isSameWeek))
-    } 
-    else {
-      return tasks.filter(task => task.projectId === projectId)
-    }
-  }
-
-  const deleteTask = (taskId) => {
-    const index = tasksList.findIndex(task => task.id === taskId);
-    
-    if (index !== -1) {
-      tasksList.splice(index, 1);    
-    } else {
-        console.error(`Task with id ${taskId} not found.`);
-    }
-  }
-
-  return {
-    addTask,
-    getAllTasks,
-    deleteTask,
-    getTasksByProjectId
-  }
-
-})()
-
-
-
-
-
-
-
 

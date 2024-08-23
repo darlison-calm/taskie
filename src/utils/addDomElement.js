@@ -3,10 +3,9 @@ export function addDomElement({tag, textContent = '', className = '', attr = {}}
   const element = document.createElement(tag);
 
   if (Array.isArray(className)) {  
-    className.forEach(cls => element.classList.add(cls));
+    className.forEach(cla => element.classList.add(cla));
 
   } else if (className) {
-    
     element.classList.add(className)
   }
 

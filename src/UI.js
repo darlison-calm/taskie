@@ -1,9 +1,11 @@
-import Pubsub from "./utils/pubsub"
+import PubSub from "./utils/pubsub"
 import { EVENTS } from "./utils/constants";
 import { addDomElement } from "./utils/addDomElement";
-import { format} from "date-fns";
+import { format, nextDay} from "date-fns";
 import { taskManager } from "./task-factory";
 import { projectsManager } from "./project";
+import { Task } from "./task-factory";
+import { editTask } from "./application";
 
 export function displayProjectList(projects) {
   const projectsContainer = document.getElementById("projects-container");
@@ -34,7 +36,6 @@ export function displayProjectList(projects) {
 }
 
 function displayTask(task, tasksContainer) {
-  
   const itemTask = addDomElement({
     tag: 'li',
     className: 'list-group-item',
@@ -50,7 +51,8 @@ function displayTask(task, tasksContainer) {
   })
   
   checkbox.addEventListener('change', function() {
-    updateTaskCompletion(this.checked, task, title, btnEditIcon, priority, date, description);
+    updateTaskCompleteStyle(this.checked, task, title, btnEditIcon, priority, date, description);
+    PubSub.publish(EVENTS.TASK_LIST_UPDATE, taskManager.getTasksByProjectId(projectsManager.getCurrentProject()))
   })
   
   const taskDeatils = addDomElement({
@@ -66,7 +68,7 @@ function displayTask(task, tasksContainer) {
 
   const description = addDomElement({
     tag: 'p',
-    className: 'task-description',
+    className: task.complete ? ['task-description', 'completed'] : 'task-description',
     textContent: task.description, 
   })
 
@@ -94,7 +96,7 @@ function displayTask(task, tasksContainer) {
 
   btnDelete.addEventListener('click', (e) => {
     const index = Number(e.target.dataset.id)
-    Pubsub.publish(EVENTS.TASK_DELETED, index)
+    PubSub.publish(EVENTS.TASK_DELETED, index)
   })
 
   const btnEdit = addDomElement({
@@ -107,31 +109,37 @@ function displayTask(task, tasksContainer) {
 
   const btnEditIcon = addDomElement({
     tag: 'i',
-    className : ['fa-solid', 'fa-pen-to-square', 'fa-lg'],
+    className : task.complete ? ['fa-solid', 'fa-pen-to-square', 'fa-lg', 'completed'] : ['fa-solid', 'fa-pen-to-square', 'fa-lg'],
     attr : {
       'data-id' : task.id
     }
+  })
+
+  btnEdit.addEventListener('click', (e) => {
+    const taskId = Number(e.target.dataset.id)
+    handleTaskEditClick(taskManager.getTaskById(taskId), taskId)
   })
   
   btnEdit.appendChild(btnEditIcon);
 
   const priority = addDomElement({
     tag: 'p',
-    className: 'task-priority',
+    className: task.complete ? ['task-priority', 'completed'] : ['task-priority'],
     textContent: `Priority: ${task.priority}`
   })
 
-  const dateString = new Date(task.dueDate.replace(/-/g, '/'))
+  let dateString = new Date(task.dueDate)
+  dateString = new Date(dateString.getTime() - dateString.getTimezoneOffset() * -60000 )
   
   const date = addDomElement({
     tag: 'p',
-    className: 'task-due-date',
+    className: task.complete ?['task-due-date', 'completed'] : 'task-priority',
     textContent: `Due date: ${format(dateString, 'MMM d, yyyy')}`
   })
 
   const divFlex = addDomElement({
     tag: 'div',
-    className: 'd-flex'
+    className: 'd-flex-1'
   }) 
 
   const divFlexSecond = addDomElement({
@@ -140,7 +148,6 @@ function displayTask(task, tasksContainer) {
   })
   
   checkbox.checked = task.complete
-
 
   itemTask.appendChild(checkbox)
 
@@ -190,8 +197,8 @@ export function populateSelectProject(container) {
   })
 }
 
-function updateTaskCompletion(isChecked, task, ...elements) {
-  task.toggleComplete()
+function updateTaskCompleteStyle(isChecked, task, ...elements) {
+  task.complete = isChecked
 
   elements.forEach(e => {
     if (isChecked) {
@@ -199,5 +206,50 @@ function updateTaskCompletion(isChecked, task, ...elements) {
     } else {
       e.classList.remove('completed')
     }
+  })
+}
+
+function handleTaskEditClick(task, taskId) {
+  const updateTaskModal = document.querySelector('#update-task-dialog') 
+  let updateTaskForm = document.getElementById('update-task-form')
+  
+  const newUpdateForm = updateTaskForm.cloneNode(true)
+
+  updateTaskForm.parentNode.replaceChild(newUpdateForm, updateTaskForm);
+
+  updateTaskForm = newUpdateForm
+    populateForm(updateTaskForm, {
+      '#update-task-title' : task.title,
+      '#update-task-description' : task.description,
+      '#update-task-due-date' : task.dueDate,
+      '#update-task-priority' : task.priority,
+      '#update-task-project' : task.projectID,
+    })
+  populateSelectProject('update-task-project')
+
+  updateTaskModal.showModal();
+  
+  updateTaskForm.addEventListener('submit', e => {
+    e.preventDefault()
+    let title = document.querySelector('#update-task-title').value
+    let description = document.querySelector('#update-task-description').value
+    let date = document.querySelector('#update-task-due-date').value
+    let priority = document.querySelector('#update-task-priority').value
+    let project = document.querySelector('#update-task-project').value
+    
+    const newTask = new Task(title, date, priority, description, project)
+
+    editTask(newTask, taskId)
+    updateTaskModal.close()
+  })
+
+  updateTaskForm.querySelector('#cancel-task-update').addEventListener('click', () => {
+    updateTaskModal.close()
+  })
+}
+
+function populateForm (form, fieldValues) {
+  Object.entries(fieldValues).forEach(([selector, value]) => {
+    form.querySelector(selector).value = value
   })
 }

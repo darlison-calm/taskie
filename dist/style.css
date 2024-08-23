@@ -106,7 +106,6 @@ span {
 
 .projects-section{
   border-top: 2px solid var(--primary-special-color);
-  
   margin: var(--margin-xs) var(--margin-s);
   & p {
     font-weight: 580;
@@ -170,6 +169,12 @@ h6 {
   font-size: 1.2rem;
   line-height: 1;
   font-weight: lighter;
+}
+
+.d-flex-1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .d-flex {
