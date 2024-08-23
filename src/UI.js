@@ -212,6 +212,11 @@ function updateTaskCompleteStyle(isChecked, task, ...elements) {
 function handleTaskEditClick(task, taskId) {
   const updateTaskModal = document.querySelector('#update-task-dialog') 
   let updateTaskForm = document.getElementById('update-task-form')
+
+  if (!updateTaskModal || !updateTaskForm) {
+    console.error('Modal or form element not found.');
+    return;
+  }
   
   const newUpdateForm = updateTaskForm.cloneNode(true)
 
