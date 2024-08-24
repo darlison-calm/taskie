@@ -13,22 +13,16 @@ export const taskManager = (function() {
   }
 
   const getTasksByProjectId = (projectId) => {
-    let sortedTasks
-    if (projectId === 'Today') {
-      sortedTasks = tasksList.filter(task => checkMatchingDate(task.dueDate, isSameDay))
-      sortedTasks = changeOrderByComplete(sortedTasks)
-      return sortedTasks
-    } 
-    else if (projectId === 'Week') {
-      sortedTasks = tasksList.filter(task => checkMatchingDate(task.dueDate, isSameWeek))
-      sortedTasks = changeOrderByComplete(sortedTasks)
-      return sortedTasks
-    } 
-    else {
-      sortedTasks = tasksList.filter(task => task.projectId === projectId)
-      sortedTasks = changeOrderByComplete(sortedTasks)
-      return sortedTasks
+    const filters = {
+      'Today' : tasksList.filter(task => checkMatchingDate(task.dueDate, isSameDay)),
+      'Week' : tasksList.filter(task => checkMatchingDate(task.dueDate, isSameWeek)),
+      default : tasksList.filter(task => task.projectId === projectId)
     }
+
+    let sortedTasks = filters[projectId] || filters.default
+    sortedTasks = changeOrderByComplete(sortedTasks)
+
+    return sortedTasks
   }
 
   const deleteTask = (taskId) => {
