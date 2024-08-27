@@ -27,8 +27,8 @@
     font-size: 15px;
     
     --ff: "Quicksand", sans-serif;
-    --primary-dark: #000814;
-    --secondary-dark: #001d3d;
+    --primary-dark: black;
+    --secondary-dark: #FCFCFC;
     --primary-special-color: #FFC300;
     --primary-light: #eee;
     --secondary-light: #c7c7c7;
@@ -83,7 +83,7 @@ span {
   }
 
   & button:hover {
-    background-color: var(--secondary-dark);
+    background-color: rgb(31, 30, 30)
   }
 }
 
@@ -101,11 +101,16 @@ span {
 
 .completed {
   text-decoration: line-through;
-  color: #01050f !important;
+  color: rgb(59, 55, 55) !important;
+}
+
+.completed-date-priority {
+  background-color:  #01050f28 !important;;
+  text-decoration: line-through;
 }
 
 .projects-section{
-  border-top: 2px solid var(--primary-special-color);
+  border-top: 2px solid var(--primary-light);
   margin: var(--margin-xs) var(--margin-s);
   & p {
     font-weight: 580;
@@ -128,7 +133,7 @@ span {
   }
 
   & .btn-projects:hover {
-    background-color: var(--secondary-dark);
+    background-color: rgb(31, 30, 30)
   }
 }
 
@@ -145,7 +150,6 @@ span {
 }
 
 #add-task {
-  color: var(--primary-special-color);
   font-weight: bolder;
 }
 
@@ -156,7 +160,7 @@ span {
 }
 
 .list-group-item {
-  color: aliceblue;
+  color: black;
   display: flex;
   align-items: flex-start;
   gap: 6px;
@@ -168,13 +172,14 @@ span {
 h6 {
   font-size: 1.2rem;
   line-height: 1;
-  font-weight: lighter;
+  font-weight: 500;
 }
 
 .d-flex-1 {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 4px;
 }
 
 .d-flex {
@@ -185,6 +190,28 @@ h6 {
 .task-priority, .task-due-date {
   font-size: 0.9rem;
   margin-right: var(--margin-s);
+  background-color: #e5e7eb;
+  border-radius: 4px;
+  padding: 2px 2px;
+  color: black;
+}
+
+.high-priority-task, .medium-priority-task, .low-priority-task {
+  border: none;
+  font-weight: 500;
+}
+
+.high-priority-task {
+  background-color: #e63946;
+  
+}
+
+.medium-priority-task {
+  background-color: var(--primary-special-color);
+}
+
+.low-priority-task {
+  background-color: rgb(102, 172, 205);
 }
 
 .task-description {
@@ -201,6 +228,7 @@ input[type=checkbox] {
 
 .fa-xmark {
   transition: scale 0.1s ease;
+  color: black;
 }
 .fa-xmark:hover {
   scale: 1.3;
@@ -214,14 +242,11 @@ input[type=checkbox] {
 
 .fa-pen-to-square {
   transition: scale 0.1s ease;
-  color: white;
 }
 
 .fa-pen-to-square:hover {
   scale: 1.3;
 }
-
-
 
 .fa-lg {
   font-size: 1.2em;
