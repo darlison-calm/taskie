@@ -215,7 +215,9 @@ function updateTaskCompleteStyle(isChecked, task, ...elements) {
 function handleTaskEditClick(task, taskId) {
   const updateTaskModal = document.querySelector('#update-task-dialog') 
   let updateTaskForm = document.getElementById('update-task-form')
-  console.log(task.title)
+  
+  populateSelectProject('update-task-project')
+  
   populateForm(updateTaskForm, {
     '#update-task-title' : task.title,
     '#update-task-description' : task.description,
@@ -223,9 +225,6 @@ function handleTaskEditClick(task, taskId) {
     '#update-task-priority' : task.priority,
     '#update-task-project' : task.projectId,
   })
-  
-  populateSelectProject('update-task-project')
-
   updateTaskModal.showModal();
   
   const updateFormHandler = e => {
