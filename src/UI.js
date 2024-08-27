@@ -36,6 +36,9 @@ export function displayProjectList(projects) {
 }
 
 function displayTask(task, tasksContainer) {
+ 
+  const priorityClass = priorityStyle(task.priority)
+
   const itemTask = addDomElement({
     tag: 'li',
     className: 'list-group-item',
@@ -124,8 +127,8 @@ function displayTask(task, tasksContainer) {
 
   const priority = addDomElement({
     tag: 'p',
-    className: task.complete ? ['task-priority', 'completed'] : ['task-priority'],
-    textContent: `Priority: ${task.priority}`
+    className: task.complete ? ['task-priority', 'completed-date-priority', priorityClass] : ['task-priority', priorityClass],
+    textContent: `Prioridade: ${task.priority}`
   })
 
   let dateString = new Date(task.dueDate)
@@ -133,8 +136,8 @@ function displayTask(task, tasksContainer) {
   
   const date = addDomElement({
     tag: 'p',
-    className: task.complete ?['task-due-date', 'completed'] : 'task-priority',
-    textContent: `Due date: ${format(dateString, 'MMM d, yyyy')}`
+    className: task.complete ? ['task-due-date', 'completed-date-priority'] : 'task-priority',
+    textContent: `Data de vencimento: ${format(dateString, 'MMM d, yyyy')}`
   })
 
   const divFlex = addDomElement({
@@ -212,7 +215,7 @@ function updateTaskCompleteStyle(isChecked, task, ...elements) {
 function handleTaskEditClick(task, taskId) {
   const updateTaskModal = document.querySelector('#update-task-dialog') 
   let updateTaskForm = document.getElementById('update-task-form')
-
+  console.log(task.title)
   populateForm(updateTaskForm, {
     '#update-task-title' : task.title,
     '#update-task-description' : task.description,
@@ -255,4 +258,17 @@ function populateForm (form, fieldValues) {
   Object.entries(fieldValues).forEach(([key, value]) => {
     form.querySelector(key).value = value
   })
+}
+
+function priorityStyle(priority) {
+  const styles = {
+    'HIGH' : 'high-priority-task',
+    'ALTA' : 'high-priority-task',
+    'MEDIUM' : 'medium-priority-task',
+    'MÉDIA' : 'medium-priority-task',
+    'LOW' : 'low-priority-task',
+    'BAIXA' : 'low-priority-task'
+  }
+  
+  return  styles[priority]
 }

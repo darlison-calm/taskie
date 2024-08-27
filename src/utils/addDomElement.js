@@ -5,8 +5,8 @@ export function addDomElement({tag, textContent = '', className = '', attr = {}}
   if (Array.isArray(className)) {  
     className.forEach(cla => element.classList.add(cla));
 
-  } else if (className) {
-    element.classList.add(className)
+  } else if (typeof className === 'string' && className.trim()) {
+    element.classList.add(className);
   }
 
   if (textContent) {
