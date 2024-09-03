@@ -1,71 +1,6 @@
 import { isSameDay, isSameWeek } from "date-fns";
 import { checkMatchingDate } from "./application";
 
-export const taskManager = (function() {
-  const tasksList = []
-
-  const addTask = (task) => {
-    tasksList.push(task);
-  }
-
-  const getAllTasks = () => {
-    return tasksList
-  }
-
-  const getTasksByProjectId = (projectId) => {
-    const filters = {
-      'Today' : tasksList.filter(task => checkMatchingDate(task.dueDate, isSameDay)),
-      'Week' : tasksList.filter(task => checkMatchingDate(task.dueDate, isSameWeek)),
-      default : tasksList.filter(task => task.projectId === projectId)
-    }
-
-    let sortedTasks = filters[projectId] || filters.default
-    sortedTasks = changeOrderByComplete(sortedTasks)
-
-    return sortedTasks
-  }
-
-  const deleteTask = (taskId) => {
-    const index = tasksList.findIndex(task => task.id === taskId);
-    if (index !== -1) {
-      tasksList.splice(index, 1);    
-    } else {
-        console.error(`Task with id ${taskId} not found.`);
-    }
-  }
-
-  const getTaskById = (taskId) => {
-    const index = tasksList.findIndex(task => task.id === taskId);
-    return tasksList[index];
-  }
-
-  const editTask = (newTask, oldTaskId) => {
-    const index = tasksList.findIndex(task => task.id === oldTaskId);
-    tasksList[index] = newTask
-  }
-
-  const changeOrderByComplete = (tasks) => {
-    const uncompleted = tasks.filter(t => t.complete === false)
-    const completed = tasks.filter(t => t.complete === true)
-    return uncompleted.concat(completed)
-  }
-
-  const setTasks = (tasks) => {
-    tasksList.length = 0;
-    tasksList.push(...tasks);
-  }
-
-  return {
-    addTask,
-    getAllTasks,
-    deleteTask,
-    getTasksByProjectId,
-    getTaskById,
-    editTask,
-    setTasks
-  }
-})()
-
 export class Task {
   constructor(title, dueDate = '', priority = '', description, projectId) {
     this._title = title;
@@ -139,3 +74,68 @@ export class Task {
   }
 }
 
+export const taskManager = (function() {
+  const tasksList = []
+ 
+  const addTask = (task) => {
+    tasksList.push(task);
+  }
+
+  const getAllTasks = () => {
+    return tasksList
+  }
+
+  const getTasksByProjectId = (projectId) => {
+    const filters = {
+      'Today' : tasksList.filter(task => checkMatchingDate(task.dueDate, isSameDay)),
+      'Week' : tasksList.filter(task => checkMatchingDate(task.dueDate, isSameWeek)),
+      default : tasksList.filter(task => task.projectId === projectId)
+    }
+
+    let sortedTasks = filters[projectId] || filters.default
+    sortedTasks = changeOrderByComplete(sortedTasks)
+    return sortedTasks
+  }
+
+  const deleteTask = (taskId) => {
+    const index = tasksList.findIndex(task => task.id === taskId);
+    if (index !== -1) {
+      tasksList.splice(index, 1);    
+    } else {
+        console.error(`Task with id ${taskId} not found.`);
+    }
+  }
+
+  const getTaskById = (taskId) => {
+    const index = tasksList.findIndex(task => task.id === taskId);
+    return tasksList[index];
+  }
+
+  const editTask = (newTask, oldTaskId) => {
+    const index = tasksList.findIndex(task => task.id === oldTaskId);
+    tasksList[index] = newTask
+  }
+
+  const changeOrderByComplete = (tasks) => {
+    const uncompleted = tasks.filter(t => t.complete === false)
+    const completed = tasks.filter(t => t.complete === true)
+    return uncompleted.concat(completed)
+  }
+
+  const setTasks = (tasks) => {
+    tasksList.length = 0;
+    tasksList.push(...tasks);
+  }
+
+  return {
+    addTask,
+    getAllTasks,
+    deleteTask,
+    getTasksByProjectId,
+    getTaskById,
+    editTask,
+    setTasks
+  }
+})()
+
+ 

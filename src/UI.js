@@ -11,7 +11,6 @@ import { saveTaskState } from "./storageManager";
 export function displayProjectList(projects) {
   const projectsContainer = document.getElementById("projects-container");
   projectsContainer.innerHTML = ''
-  
   const projectsToDisplay = projects.slice(1)
   
   projectsToDisplay.forEach(pro => {

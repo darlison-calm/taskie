@@ -21,7 +21,12 @@ export const projectsManager = (function() {
 
   const setProjects = (values) => {
     projects.length = 0
-    projects.push(...values);
+    if (values.includes('Inbox')) {
+      projects.push(...values);
+    } else {
+      projects.push('Inbox')
+      projects.push(...values)
+    }
   }
 
   return {
