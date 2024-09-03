@@ -47,8 +47,12 @@ export const taskManager = (function() {
   const changeOrderByComplete = (tasks) => {
     const uncompleted = tasks.filter(t => t.complete === false)
     const completed = tasks.filter(t => t.complete === true)
-
     return uncompleted.concat(completed)
+  }
+
+  const setTasks = (tasks) => {
+    tasksList.length = 0;
+    tasksList.push(...tasks);
   }
 
   return {
@@ -57,7 +61,8 @@ export const taskManager = (function() {
     deleteTask,
     getTasksByProjectId,
     getTaskById,
-    editTask
+    editTask,
+    setTasks
   }
 })()
 
@@ -75,6 +80,10 @@ export class Task {
 
   static generateId() {
     return Task.taskId++;
+  }
+
+  set id(value) {
+    this._id = value;
   }
 
   get id() {

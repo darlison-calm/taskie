@@ -4,27 +4,38 @@ import { taskManager } from "./task-factory.js";
 import { projectsManager } from "./project.js";
 import { displayTasks, manageActiveBtnStyle, displayProjectList} from './UI.js';
 import { format } from "date-fns";
+import { saveProjectState, saveTaskState } from "./storageManager.js";
 
-function createTask(task) {
-  const currentProject = projectsManager.getCurrentProject()
+export function createTask(task) {
   taskManager.addTask(task)
+  saveTaskState()
+  renderTasks()
+}
+
+export function renderTasks() {
+  const currentProject = projectsManager.getCurrentProject()
   PubSub.publish(EVENTS.TASK_LIST_UPDATE, taskManager.getTasksByProjectId(currentProject))
 }
 
 export function editTask(newTask, oldTaskId) {
-  const currentProject = projectsManager.getCurrentProject()
   taskManager.editTask(newTask, oldTaskId)
-  PubSub.publish(EVENTS.TASK_LIST_UPDATE, taskManager.getTasksByProjectId(currentProject))
+  saveTaskState()
+  renderTasks()
 }
 
 function deleteTask(task) {
-  const currentProject = projectsManager.getCurrentProject()
   taskManager.deleteTask(task)
-  PubSub.publish(EVENTS.TASK_LIST_UPDATE, taskManager.getTasksByProjectId(currentProject));
+  saveTaskState()
+  renderTasks()
 }
 
 function createProject(name) {
   projectsManager.addProject(name)
+  saveProjectState();
+  renderProjectList();
+}
+
+export function renderProjectList() {
   PubSub.publish(EVENTS.PROJECT_LIST_UPDATE , projectsManager.getProjects())
 }
 

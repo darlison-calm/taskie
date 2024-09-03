@@ -1,7 +1,7 @@
 export const projectsManager = (function() {
   const projects = ['Inbox']
 
-  let currentProject = projects[0]
+  let currentProject = projects[0];
 
   const addProject = (project) => {
     projects.push(project)
@@ -19,12 +19,18 @@ export const projectsManager = (function() {
 
   const getProjects = () => projects
 
+  const setProjects = (values) => {
+    projects.length = 0
+    projects.push(...values);
+  }
+
   return {
     addProject,
     deleteProject,
     getProjects,
     getCurrentProject,
-    setCurrentProject
+    setCurrentProject,
+    setProjects
   }
 })()
 

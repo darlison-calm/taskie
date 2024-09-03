@@ -1,17 +1,18 @@
 import PubSub from "./utils/pubsub"
 import { EVENTS } from "./utils/constants";
 import { addDomElement } from "./utils/addDomElement";
-import { format, nextDay} from "date-fns";
+import { format} from "date-fns";
 import { taskManager } from "./task-factory";
 import { projectsManager } from "./project";
 import { Task } from "./task-factory";
 import { editTask } from "./application";
+import { saveTaskState } from "./storageManager";
 
 export function displayProjectList(projects) {
   const projectsContainer = document.getElementById("projects-container");
   projectsContainer.innerHTML = ''
   
-  const projectsToDisplay = projects.slice(1);
+  const projectsToDisplay = projects.slice(1)
   
   projectsToDisplay.forEach(pro => {
     const projectItem = addDomElement({
@@ -89,7 +90,7 @@ function displayTask(task, tasksContainer) {
  
   const btnDeleteIcon = addDomElement({
     tag: 'i',
-    className: ["fa-solid", "fa-xmark", "fa-lg"],
+    className: ["fa-solid", "fa-trash", "fa-lg"],
     attr: {
       'data-id': task.id
     }
@@ -202,7 +203,7 @@ export function populateSelectProject(container) {
 
 function updateTaskCompleteStyle(isChecked, task, ...elements) {
   task.complete = isChecked
-
+  saveTaskState()
   elements.forEach(e => {
     if (isChecked) {
       e.classList.add('completed')
@@ -268,6 +269,5 @@ function priorityStyle(priority) {
     'LOW' : 'low-priority-task',
     'BAIXA' : 'low-priority-task'
   }
-  
-  return  styles[priority]
+  return styles[priority]
 }

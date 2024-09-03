@@ -4,28 +4,31 @@ import { EVENTS } from "./utils/constants";
 import { populateSelectProject } from "./UI";
 
 export const taskForm = {
-
   setupAddTaskEventListener() {
     const taskModal = document.getElementById('task-dialog')
     const addTaskBtn = document.getElementById('add-task') 
     const form = document.getElementById('task-form') 
     
-    addTaskBtn.addEventListener('click', () => {
+    const onAddTaskClick = () => {
       populateSelectProject('task-project')
       taskModal.showModal();
-    })
+    }
 
-    form.querySelector('#cancel-new-task').addEventListener('click', () => {
+    const onCancelClick = () => {
       taskModal.close();
-      form.reset
-    })
+      form.reset();
+    }
 
-    form.addEventListener('submit', (e) => {
+    const onSubmit = (e) => {
       e.preventDefault();
       taskForm.add();
       taskModal.close();
       form.reset();
-    })
+    }
+
+    addTaskBtn.addEventListener('click', onAddTaskClick)
+    form.querySelector('#cancel-new-task').addEventListener('click', onCancelClick)
+    form.addEventListener('submit', onSubmit)
   },
 
   add() {
@@ -36,5 +39,5 @@ export const taskForm = {
     let project = document.querySelector('#task-project').value
     const task = new Task(title, date, priority, description, project)
     PubSub.publish(EVENTS.TASK_ADDED, task)
-  } 
+  },
 }
