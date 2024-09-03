@@ -3,7 +3,6 @@ import { taskForm } from "./task-form";
 import { initializeNavigation, subscribeToProjectEvents, subscribeToInitialTaskEvents, renderTasks, renderProjectList} from "./application";
 import { loadProjectState, loadTaskState, saveProjectState, saveTaskState } from "./storageManager";
 
-saveTaskState()
 loadTaskState();
 saveProjectState()
 loadProjectState();
