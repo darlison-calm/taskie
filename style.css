@@ -159,6 +159,13 @@ span {
   margin: var(--margin-xs) var(--margin-xl);
 }
 
+div .fa-bars {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 var(--margin-xl);
+  margin-top: var(--margin-xs);
+}
+
 .list-group-item {
   color: black;
   display: flex;
@@ -202,7 +209,7 @@ h6 {
 
 .high-priority-task {
   background-color: #e63946;
-  
+
 }
 
 .medium-priority-task {
@@ -250,7 +257,29 @@ input[type=checkbox] {
 .fa-lg {
   font-size: 1.2em;
 }
+
+.fa-bars {
+  font-size: 1.7em;
+  color: black;
+  
+}
+
+.fa-bars:hover {
+  cursor: pointer;
+}
 /* <uniquifier>: Use a unique and descriptive class name
 <weight>: Use a value from 300 to 700 */
 
-  
+.toogle-sidebar{
+  width: 0 !important;
+  display: none !important;
+}
+
+.task-view-focus {
+  width: 100vw;
+}
+
+#add-task-secondary {
+  margin: 0px 20px;
+  font-size: 1.3em;
+}
