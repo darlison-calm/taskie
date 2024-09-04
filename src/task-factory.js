@@ -1,5 +1,6 @@
 import { isSameDay, isSameWeek } from "date-fns";
 import { checkMatchingDate } from "./application";
+import { saveTaskState } from "./storageManager";
 
 export class Task {
   constructor(title, dueDate = '', priority = '', description, projectId) {
@@ -74,26 +75,9 @@ export class Task {
   }
 }
 
-  const estudo = new Task('Estudar Matemática', '2024-09-03', 'ALTA', 'Por duas horas', 'Inbox')
-
-  const presentes = new Task('Comprar Presentes', '2024-12-15', 'MÉDIA', 'Comprar presentes de Natal para a família', 'Inbox');
-
-  const relatorio = new Task('Revisar Relatório', '2024-09-10', 'ALTA', 'Revisar e corrigir erros no relatório trimestral', 'Trabalho');
-
-  const exercicios = new Task('Fazer Exercícios','2024-09-04', 'BAIXA', 'Caminhar por uma hora no parque', 'Saúde');
-
-  const baixa = new Task('Fazer a casa', '2024-09-04', 'BAIXA', '' , 'Inbox')
-
-  const viagem = new Task('Planejar Viagem', '2024-11-01', 'MÉDIA', 'Pesquisar e reservar voos e hotéis para as férias', 'Inbox');
-
-  const exame = new Task('Estudar para Exame', '2024-10-20', 'ALTA', 'Estudar todos os tópicos do exame final de física', 'Inbox');
-
-  exame.complete = true
-  viagem.complete = true
-  relatorio.complete = true
-
+  
 export const taskManager = (function() {
-  const tasksList = [relatorio,viagem]
+  const tasksList = []
  
   const addTask = (task) => {
     tasksList.push(task);

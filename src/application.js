@@ -12,11 +12,6 @@ export function createTask(task) {
   renderTasks()
 }
 
-export function renderTasks() {
-  const currentProject = projectsManager.getCurrentProject()
-  PubSub.publish(EVENTS.TASK_LIST_UPDATE, taskManager.getTasksByProjectId(currentProject))
-}
-
 export function editTask(newTask, oldTaskId) {
   taskManager.editTask(newTask, oldTaskId)
   saveTaskState()
@@ -35,10 +30,6 @@ function createProject(name) {
   renderProjectList();
 }
 
-export function renderProjectList() {
-  PubSub.publish(EVENTS.PROJECT_LIST_UPDATE , projectsManager.getProjects())
-}
-
 function setupNavTasksButtons(buttonId, project) {
   const button = document.querySelector(buttonId)
 
@@ -48,6 +39,17 @@ function setupNavTasksButtons(buttonId, project) {
     displayTasks(taskManager.getTasksByProjectId(project))
   })
 }
+
+export function renderProjectList() {
+  PubSub.publish(EVENTS.PROJECT_LIST_UPDATE , projectsManager.getProjects())
+}
+
+
+export function renderTasks() {
+  const currentProject = projectsManager.getCurrentProject()
+  PubSub.publish(EVENTS.TASK_LIST_UPDATE, taskManager.getTasksByProjectId(currentProject))
+}
+
 export function initializeNavigation() {
   setupNavTasksButtons('#today-btn', 'Today')
   setupNavTasksButtons('#week-btn', 'Week')

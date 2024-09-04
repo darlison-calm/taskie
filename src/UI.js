@@ -270,3 +270,17 @@ function priorityStyle(priority) {
   }
   return styles[priority]
 }
+
+export function closeNav() {
+  const sidebar = document.querySelector(".sidebar")
+  sidebar.classList.add("toogle-sidebar")
+  const tasksView = document.querySelector(".tasks-container")
+  tasksView.classList.add("task-view-focus")
+}
+
+export function openNav() {
+  const sidebar = document.querySelector(".sidebar")
+  sidebar.classList.remove("toogle-sidebar")
+  const tasksView = document.querySelector(".tasks-container")
+  tasksView.classList.remove("task-view-focus")
+}
