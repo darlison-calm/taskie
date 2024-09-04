@@ -64,6 +64,8 @@ span {
 
 .tasks-container {
     background-color: var(--secondary-dark);
+    display: flex;
+    flex-direction: column;
   }
 
 .sidebar-nav {
@@ -159,12 +161,17 @@ span {
   margin: var(--margin-xs) var(--margin-xl);
 }
 
-div .fa-bars {
+.sidebar-toggle {
   display: flex;
   justify-content: flex-end;
+}
+
+.fa-bars {
   margin: 0 var(--margin-xl);
   margin-top: var(--margin-xs);
 }
+
+
 
 .list-group-item {
   color: black;
@@ -288,6 +295,6 @@ input[type=checkbox] {
 @media only screen and (max-width: 400px) {
 
   :root { 
-     font-size: 12px; 
+     font-size: 12px !important; 
   }
 }
