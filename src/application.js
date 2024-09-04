@@ -2,7 +2,7 @@ import PubSub from "./utils/pubsub.js";
 import { EVENTS } from "./utils/constants.js";
 import { taskManager } from "./task-factory.js";
 import { projectsManager } from "./project.js";
-import { displayTasks, manageActiveBtnStyle, displayProjectList} from './UI.js';
+import { displayTasks, manageActiveBtnStyle, displayProjectList, openNav, closeNav} from './UI.js';
 import { format } from "date-fns";
 import { saveProjectState, saveTaskState } from "./storageManager.js";
 
@@ -40,10 +40,23 @@ function setupNavTasksButtons(buttonId, project) {
   })
 }
 
+function toogleSidebar() {
+  const toogleSideBtn = document.querySelector(".fa-bars")
+
+  toogleSideBtn.addEventListener("click" , () => {
+    const sidebar = document.querySelector(".sidebar");
+    if (sidebar.classList.contains("toogle-sidebar")) {
+      openNav();
+    } else {
+      closeNav();
+    }
+  })
+}
+
+
 export function renderProjectList() {
   PubSub.publish(EVENTS.PROJECT_LIST_UPDATE , projectsManager.getProjects())
 }
-
 
 export function renderTasks() {
   const currentProject = projectsManager.getCurrentProject()
@@ -54,6 +67,7 @@ export function initializeNavigation() {
   setupNavTasksButtons('#today-btn', 'Today')
   setupNavTasksButtons('#week-btn', 'Week')
   setupNavTasksButtons('#all-btn', 'Inbox')
+  toogleSidebar();
 }
 
 export function subscribeToInitialTaskEvents() {

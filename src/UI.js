@@ -272,15 +272,18 @@ function priorityStyle(priority) {
 }
 
 export function closeNav() {
-  const sidebar = document.querySelector(".sidebar")
-  sidebar.classList.add("toogle-sidebar")
-  const tasksView = document.querySelector(".tasks-container")
-  tasksView.classList.add("task-view-focus")
+  toggleClasses('add', 'add')
 }
 
 export function openNav() {
-  const sidebar = document.querySelector(".sidebar")
-  sidebar.classList.remove("toogle-sidebar")
-  const tasksView = document.querySelector(".tasks-container")
-  tasksView.classList.remove("task-view-focus")
+  toggleClasses('remove', 'remove')
 }
+
+function toggleClasses(sidebarClassAction, tasksViewClassAction) {
+  const sidebar = document.querySelector(".sidebar");
+  const tasksView = document.querySelector(".tasks-container");
+
+  sidebar.classList[sidebarClassAction]("toogle-sidebar");
+  tasksView.classList[tasksViewClassAction]("task-view-focus");
+}
+
