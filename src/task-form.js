@@ -9,6 +9,8 @@ export const taskForm = {
     const addTaskBtn = document.getElementById('add-task') 
     const form = document.getElementById('task-form') 
     const addTaskBtnSecond = document.getElementById('add-task-secondary')
+    const cancelXBtn = document.getElementById('cancel-task-x')
+    
     const onAddTaskClick = () => {
       populateSelectProject('task-project')
       taskModal.showModal();
@@ -29,6 +31,7 @@ export const taskForm = {
     addTaskBtn.addEventListener('click', onAddTaskClick)
     addTaskBtnSecond.addEventListener('click', onAddTaskClick)
     form.querySelector('#cancel-new-task').addEventListener('click', onCancelClick)
+    cancelXBtn.addEventListener('click', onCancelClick)
     form.addEventListener('submit', onSubmit)
   },
 

@@ -8,10 +8,17 @@ export const projectForm = {
     const addProjectBtn = document.getElementById('add-project')
     const form = document.getElementById('project-form')
     const errorElement = document.getElementById('error')
-    
+    const cancelXbtn = document.getElementById('cancel-project')
+
     addProjectBtn.addEventListener('click' , () => projectModal.showModal())
 
     form.querySelector('#cancel').addEventListener('click', () => {
+      projectModal.close();
+      errorElement.innerHTML = ''
+      form.reset()
+    })
+
+    cancelXbtn.addEventListener('click', () => {
       projectModal.close();
       errorElement.innerHTML = ''
       form.reset()

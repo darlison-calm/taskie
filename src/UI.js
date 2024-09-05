@@ -253,8 +253,11 @@ function handleTaskEditClick(task, taskId) {
   }
 
   const cancelButton = updateTaskForm.querySelector('#cancel-task-update')
+  const cancelXbtn = document.getElementById('cancel-edit-x')
   cancelButton.removeEventListener('click', cancelHandler)
+  cancelXbtn.removeEventListener('click', cancelHandler)
   cancelButton.addEventListener('click', cancelHandler)
+  cancelXbtn.addEventListener('click', cancelHandler)
 }
 
 function populateForm (form, fieldValues) {
