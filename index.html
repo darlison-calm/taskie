@@ -12,7 +12,6 @@
   <script src="https://kit.fontawesome.com/8281d54d4e.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    
     <main class="content">
       <div class="sidebar">    
         <div class="sidebar-nav">
@@ -93,15 +92,19 @@
       </dialog>
 
     <!-- Add task modal -->
-    <dialog close id="task-dialog">
-      <form action="#" method="dialog" id="task-form">
+    <dialog close id="task-dialog" class="add-task-modal">
+      <form action="#" method="dialog" id="task-form" class="form-task">
+        <div class="form-header">
+          <p>Adicionar Task</p>
+          <i class="fa-solid fa-x"></i>
+        </div>
         <div class="input-container">
           <label for="task-title">Nome</label>
           <input type="text" id="task-title" required maxlength="50">
         </div>        
         
         <div class="input-container">
-          <label for="task-description">Datalhes(opcional)</label>
+          <label for="task-description">Datalhes (opcional)</label>
           <input type="text" id="task-description"  maxlength="150">
         </div>
 
@@ -126,14 +129,20 @@
           </select>
         </div>
 
-        <button type="submit" id="confirm-new-task">Confirmar</button>
-        <button type="reset" id="cancel-new-task">Cancelar</button>
+        <div class="form-btns">
+          <button type="submit" id="confirm-new-task" class="confirm-add">Confirmar</button>
+          <button type="reset" id="cancel-new-task" class="cancel-add">Cancelar</button>
+        </div>
       </form>
     </dialog>
 
      <!-- Add Edit Task Modal -->
-    <dialog close id="update-task-dialog">
-      <form action="#" method="dialog" id="update-task-form">
+    <dialog close id="update-task-dialog" class="add-task-modal">
+      <form action="#" method="dialog" id="update-task-form" class="form-task">
+        <div class="form-header">
+          <p>Alterar Task</p>
+          <i class="fa-solid fa-x"></i>
+        </div>
         <div class="input-container">
           <label for="update-task-title">Nome</label>
           <input type="text" id="update-task-title" placeholder="Nome" required maxlength="50">
@@ -165,8 +174,10 @@
           </select>
         </div>
 
-        <button type="submit" id="confirm-update-task">Alterar Task</button>
-        <button type="reset" id="cancel-task-update">Cancelar</button>
+        <div class="form-btns">
+          <button type="submit" id="confirm-update-task" class="confirm-add">Confirmar</button>
+          <button type="reset" id="cancel-task-update" class="cancel-add">Cancelar</button>
+        </div>
       </form>
     </dialog>
 
