@@ -163,8 +163,15 @@ span {
 
 .sidebar-toggle {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  margin-left: var(--margin-xl);
+  & p {
+    font-size: 2rem;
+  }
+
 }
+
+
 
 .fa-bars {
   margin: 0 var(--margin-xl);

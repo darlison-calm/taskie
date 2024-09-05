@@ -174,6 +174,9 @@ function displayTask(task, tasksContainer) {
 export function displayTasks(tasks) {
   const list = document.querySelector('#task-list');
   list.innerHTML = '' 
+  const projectTitle = document.querySelector("#projects-title")
+  projectTitle.innerHTML = ''
+  projectTitle.textContent = projectsManager.getCurrentProject()
   tasks.forEach(task => displayTask(task, list))
 }
 
