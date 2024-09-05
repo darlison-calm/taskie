@@ -1,6 +1,5 @@
 import { isSameDay, isSameWeek } from "date-fns";
 import { checkMatchingDate } from "./application";
-import { saveTaskState } from "./storageManager";
 
 export class Task {
   constructor(title, dueDate = '', priority = '', description, projectId) {
@@ -91,6 +90,8 @@ export const taskManager = (function() {
     const filters = {
       'Today' : tasksList.filter(task => checkMatchingDate(task.dueDate, isSameDay)),
       'Week' : tasksList.filter(task => checkMatchingDate(task.dueDate, isSameWeek)),
+      'Hoje' : tasksList.filter(task => checkMatchingDate(task.dueDate, isSameDay)),
+      'Semana' : tasksList.filter(task => checkMatchingDate(task.dueDate, isSameWeek)),
       default : tasksList.filter(task => task.projectId === projectId)
     }
 

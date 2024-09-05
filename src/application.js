@@ -64,8 +64,8 @@ export function renderTasks() {
 }
 
 export function initializeNavigation() {
-  setupNavTasksButtons('#today-btn', 'Today')
-  setupNavTasksButtons('#week-btn', 'Week')
+  setupNavTasksButtons('#today-btn', 'Hoje')
+  setupNavTasksButtons('#week-btn', 'Semana')
   setupNavTasksButtons('#all-btn', 'Inbox')
   toogleSidebar();
 }
