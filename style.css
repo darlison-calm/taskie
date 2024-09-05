@@ -27,7 +27,7 @@
     font-size: 15px;
     
     --ff: "Quicksand", sans-serif;
-    --primary-dark: #f8f9fa;
+    --primary-dark: #f1f1f1;
     --secondary-dark: #FCFCFC;
     --primary-special-color: #FFC300;
     --activer-btn : #e2e6ea;
@@ -380,7 +380,12 @@ input {
 
 @media only screen and (max-width: 400px) {
   :root { 
-     font-size: 12px !important; 
+     font-size: 10px !important; 
   }
+  
+  input[type=checkbox] {
+    transform: scale(1);
+  }
+
 }
 
