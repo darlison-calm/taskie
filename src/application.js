@@ -30,6 +30,25 @@ function createProject(name) {
   renderProjectList();
 }
 
+export function deleteProject(name) {
+  projectsManager.deleteProject(name)
+  saveProjectState();
+  renderProjectList();
+  deleteProjectTasks(name);
+  const inbox = projectsManager.getProjects()[0]
+  projectsManager.setCurrentProject(inbox)
+  renderTasks()
+}
+
+
+function deleteProjectTasks(project) {
+  const tasks = taskManager.getAllTasks()
+  tasks.forEach(t => {
+    if ( t.projectId === project)
+      deleteTask(t)
+  })
+}
+
 function setupNavTasksButtons(buttonId, project) {
   const button = document.querySelector(buttonId)
 

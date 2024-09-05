@@ -8,10 +8,13 @@ import { projectsManager } from "./project";
 import { Task } from "./task-factory";
 import { editTask } from "./application";
 import { saveTaskState } from "./storageManager";
+import { deleteProject } from "./application";
+
 
 export function displayProjectList(projects) {
   const projectsContainer = document.getElementById("projects-container");
   projectsContainer.innerHTML = ''
+  
   const projectsToDisplay = projects.slice(1)
   
   projectsToDisplay.forEach(pro => {
@@ -24,20 +27,19 @@ export function displayProjectList(projects) {
         'title': pro
       }
     });
-    
+
     projectItem.addEventListener('click', (e) => {
       manageActiveBtnStyle(e.target)
       const projectName = e.target.getAttribute('data-index')
       projectsManager.setCurrentProject(projectName)
       displayTasks(taskManager.getTasksByProjectId(projectsManager.getCurrentProject()))
     })
-
+  
     projectsContainer.append(projectItem);
   });
 }
 
 function displayTask(task, tasksContainer) {
- 
   const priorityClass = priorityStyle(task.priority)
 
   const itemTask = addDomElement({
@@ -90,7 +92,7 @@ function displayTask(task, tasksContainer) {
  
   const btnDeleteIcon = addDomElement({
     tag: 'i',
-    className: ["fa-solid", "fa-trash", "fa-lg"],
+    className: ["fa-solid", "fa-trash", "fa-lg","trash-project"],
     attr: {
       'data-id': task.id
     }
@@ -175,10 +177,39 @@ function displayTask(task, tasksContainer) {
 export function displayTasks(tasks) {
   const list = document.querySelector('#task-list');
   list.innerHTML = '' 
-  const projectTitle = document.querySelector("#projects-title")
-  projectTitle.innerHTML = ''
-  projectTitle.textContent = projectsManager.getCurrentProject()
+  const container = document.querySelector('.title-delete-project')
+  container.innerHTML = ""
+  
+  const projectTitle = addDomElement({
+    tag: 'p'
+  })
+
+  const project =  projectsManager.getCurrentProject();
+  projectTitle.textContent = project
+  container.appendChild(projectTitle)  
+  
+  if (project !== 'Semana' && project !== 'Hoje' && project !== 'Inbox') {
+    const deleteProjectBtn = displayDeleteProjectBtn(project);
+    container.appendChild(deleteProjectBtn);
+    
+    deleteProjectBtn.addEventListener('click', (e) => {
+      const projectId = e.target.getAttribute('data-id');
+      deleteProject(projectId);
+    });
+  }
+
   tasks.forEach(task => displayTask(task, list))
+}
+
+function displayDeleteProjectBtn(project) {
+  const btnDelete = addDomElement({
+      tag: 'i',
+      className: ["fa-solid", "fa-trash", 'fa-lg'],
+      attr: {
+       'data-id': project
+      }
+    })
+  return btnDelete
 }
 
 export function manageActiveBtnStyle(button) {
@@ -293,4 +324,5 @@ function toggleClasses(sidebarClassAction, tasksViewClassAction) {
   sidebar.classList[sidebarClassAction]("toogle-sidebar");
   tasksView.classList[tasksViewClassAction]("task-view-focus");
 }
+
 

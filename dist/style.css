@@ -365,9 +365,20 @@ input {
     background-color: #6c757d;
   }
 }
+.title-delete-project {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+
+  & .fa-trash {
+    font-size: 1.5rem;
+    color: #e63946;
+  }
+}
+
 
 @media only screen and (max-width: 400px) {
-
   :root { 
      font-size: 12px !important; 
   }

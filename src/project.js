@@ -15,7 +15,10 @@ export const projectsManager = (function() {
     currentProject = id
   }
   
-  const deleteProject = (index) => projects.splice(index, 1)
+  const deleteProject = (id) => {
+    const index = projects.findIndex(pro => pro === id)
+    projects.splice(index, 1)
+  }
 
   const getProjects = () => projects
 
