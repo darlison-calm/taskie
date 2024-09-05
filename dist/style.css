@@ -176,8 +176,6 @@ span {
   margin-top: var(--margin-xs);
 }
 
-
-
 .list-group-item {
   color: black;
   display: flex;
@@ -253,6 +251,18 @@ input[type=checkbox] {
   color: #e63946;;
 }
 
+input {
+  font-family: var(--ff);
+}
+
+.fa-solid {
+  cursor: pointer;
+}
+
+.fa-x {
+  color: #e63946;
+}
+
 .task-edit-delete {
   display: flex;
   justify-content: flex-start;
@@ -296,6 +306,55 @@ input[type=checkbox] {
   font-size: 1.3em;
 }
 
+.add-task-modal{
+  border-style: none;
+  border-radius: 6px;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-task {
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--ff);
+}
+
+.form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  & p {
+    font-size: 1.2rem;
+  }
+}
+
+.form-btns {
+  display: flex;
+  justify-content: flex-start;
+  gap: 8px;
+  align-items: center;
+  margin-top: 10px;
+
+  & button {
+    font-size: 0.9rem;
+    color: white;
+    border-radius: 3px;
+    height: 25px;
+    font-family: var(--ff);
+  }
+
+  & button.confirm-add {
+    background-color: #0d6efd;
+  }
+
+  & button.cancel-add {
+    background-color: #6c757d;
+  }
+}
 
 @media only screen and (max-width: 400px) {
 
@@ -303,3 +362,4 @@ input[type=checkbox] {
      font-size: 12px !important; 
   }
 }
+

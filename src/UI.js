@@ -2,6 +2,7 @@ import PubSub from "./utils/pubsub"
 import { EVENTS } from "./utils/constants";
 import { addDomElement } from "./utils/addDomElement";
 import { format} from "date-fns";
+import { ptBR } from "date-fns/locale";
 import { taskManager } from "./task-factory";
 import { projectsManager } from "./project";
 import { Task } from "./task-factory";
@@ -137,7 +138,7 @@ function displayTask(task, tasksContainer) {
   const date = addDomElement({
     tag: 'p',
     className: task.complete ? ['task-due-date', 'completed-date-priority'] : 'task-priority',
-    textContent: `Data de vencimento: ${format(dateString, 'MMM d, yyyy')}`
+    textContent: `Data de vencimento: ${format(dateString, 'MMMM d, yyyy', {locale: ptBR})}`
   })
 
   const divFlex = addDomElement({

@@ -106,6 +106,7 @@ export const taskManager = (function() {
       tasksList.splice(index, 1);    
     } else {
         console.error(`Task with id ${taskId} not found.`);
+        console.error(tasksList[index])
     }
   }
 
