@@ -102,12 +102,7 @@ export const taskManager = (function() {
 
   const deleteTask = (taskId) => {
     const index = tasksList.findIndex(task => task.id === taskId);
-    if (index !== -1) {
-      tasksList.splice(index, 1);    
-    } else {
-        console.error(`Task with id ${taskId} not found.`);
-        console.error(tasksList[index])
-    }
+    tasksList.splice(index, 1);    
   }
 
   const getTaskById = (taskId) => {

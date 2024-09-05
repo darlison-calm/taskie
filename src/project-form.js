@@ -21,7 +21,7 @@ export const projectForm = {
       const title = document.querySelector('#project-name').value   
       if (isProjectAlreadyAdded(title)) {
         ev.preventDefault()
-        errorElement.textContent = 'Project already added'
+        errorElement.textContent = 'Projeto já existe'
         return
       }
 

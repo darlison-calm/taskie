@@ -74,15 +74,19 @@
     
     </main>
      <!-- Add project modal -->
-      <dialog close id="project-dialog">    
-        <form id="project-form">   
-          <div>
+      <dialog close id="project-dialog" class="add-task-modal">    
+        <form id="project-form" class="form-task">
+          <div class="form-header">
+            <p>Adicionar projeto</p>
+            <i class="fa-solid fa-x"></i>
+          </div>
+          <div class="input-container">
             <label for="project-name">Nome do projeto: </p>
             <input type="text" required id="project-name" name="project-name" maxlength="20">
           </div>
-          <div>
-            <button type="submit" id="confirm">Confirmar</button>
-            <button id="cancel" type="reset">Cancelar</button>
+          <div class="form-btns">
+            <button type="submit" id="confirm" class="confirm-add">Confirmar</button>
+            <button id="cancel" type="reset" class="cancel-add">Cancelar</button>
           </div>
           <div id="error">
 
@@ -99,17 +103,17 @@
           <i class="fa-solid fa-x"></i>
         </div>
         <div class="input-container">
-          <label for="task-title">Nome</label>
+          <label for="task-title">Nome:</label>
           <input type="text" id="task-title" required maxlength="50">
         </div>        
         
         <div class="input-container">
-          <label for="task-description">Datalhes (opcional)</label>
+          <label for="task-description">Datalhes (opcional):</label>
           <input type="text" id="task-description"  maxlength="150">
         </div>
 
         <div class="input-container">
-          <label for="task-date">Data de vencimento</label>
+          <label for="task-date">Data de vencimento:</label>
           <input type="date" id="task-date" value="" required max="9999-12-31">
         </div>
       
@@ -144,17 +148,17 @@
           <i class="fa-solid fa-x"></i>
         </div>
         <div class="input-container">
-          <label for="update-task-title">Nome</label>
+          <label for="update-task-title">Nome:</label>
           <input type="text" id="update-task-title" placeholder="Nome" required maxlength="50">
         </div>        
         
         <div class="input-container">
-          <label for="update-task-description">Detalhes(opcional)</label>
+          <label for="update-task-description">Detalhes (opcional):</label>
           <input type="text" id="update-task-description" placeholder="Detalhes" maxlength="150">
         </div>
 
         <div class="input-container">
-          <label for="update-task-due-date">Data de vencimento</label>
+          <label for="update-task-due-date">Data de vencimento:</label>
           <input type="date" id="update-task-due-date" value="" required max="9999-12-30">
         </div>
       

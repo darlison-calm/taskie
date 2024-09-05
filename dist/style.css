@@ -314,6 +314,9 @@ input {
 .input-container {
   display: flex;
   flex-direction: column;
+  & input {
+    width: 100%;
+  }
 }
 
 .form-task {
@@ -327,9 +330,16 @@ input {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 40px;
   & p {
     font-size: 1.2rem;
   }
+}
+
+#error {
+  margin-top: 2px;
+  color: #e63946;
+  font-size: small;
 }
 
 .form-btns {
