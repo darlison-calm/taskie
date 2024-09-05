@@ -27,12 +27,10 @@
     font-size: 15px;
     
     --ff: "Quicksand", sans-serif;
-    --primary-dark: black;
+    --primary-dark: #f8f9fa;
     --secondary-dark: #FCFCFC;
     --primary-special-color: #FFC300;
-    --primary-light: #eee;
-    --secondary-light: #c7c7c7;
-    --new-light: #f8f9fa;
+    --activer-btn : #e2e6ea;
     --margin-xxs: .25rem;
     --margin-xs: .5rem;
     --margin-s: .75rem;
@@ -79,18 +77,18 @@ span {
   padding: var(--margin-xxs) var(--margin-);
   margin: var(--margin-xxs) var(--margin-xs);
   & button {
-    color: white;
+    color: black;
     border-radius: 4px;
     transition: background-color 0.2s ease;
   }
 
   & button:hover {
-    background-color: rgb(31, 30, 30)
+    background-color: var(--activer-btn);
   }
 }
 
 .button-active {
-  background-color: rgb(78, 78, 78)
+  background-color: var(--activer-btn)
 }
 
 .button-nav-tasks {
@@ -112,11 +110,11 @@ span {
 }
 
 .projects-section{
-  border-top: 2px solid var(--primary-light);
+  border-top: 2px solid var(--activer-btn);
   margin: var(--margin-xs) var(--margin-s);
   & p {
     font-weight: 580;
-    color: white;
+    color: black;
     font-size: 1.2em;
   }
 }
@@ -128,14 +126,14 @@ span {
  
   & .btn-projects {
      font-family: var(--ff);
-    color: white;
+    color: black;
     margin: var(--margin-xxs) var(--margin-xxs);
     font-size: 1.1em;
     border-radius: 4px;
   }
 
   & .btn-projects:hover {
-    background-color: rgb(31, 30, 30)
+    background-color: var(--activer-btn);
   }
 }
 
@@ -186,7 +184,7 @@ span {
   align-items: flex-start;
   gap: 6px;
   margin: var(--margin-xxs) 0px;
-  border-bottom: 1px solid var(--primary-dark);
+  border-bottom: 1px solid var(--activer-btn);
   padding: 6px 0px;
 }
 
