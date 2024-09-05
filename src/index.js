@@ -20,6 +20,3 @@ window.addEventListener("load", () => {
   if(window.innerWidth <= 768)
     closeNav()
 })
-// TODO:
-//Add sibe bar
-//toogles side bar
