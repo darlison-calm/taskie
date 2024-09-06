@@ -186,7 +186,7 @@ span {
 }
 
 h6 {
-  font-size: 1rem;
+  font-size: 1.2rem;
   line-height: 1;
   font-weight: 500;
 }
@@ -386,7 +386,7 @@ input {
   }
   
   input[type=checkbox] {
-    transform: scale(1);
+    transform: scale(0.9);
   }
 
 }
