@@ -58,6 +58,7 @@ span {
 
 .sidebar {
     background-color: var(--primary-dark);
+    height: 100vh;
   }
 
 .tasks-container {
@@ -169,8 +170,6 @@ span {
 
 }
 
-
-
 .fa-bars {
   margin: 0 var(--margin-xl);
   margin-top: var(--margin-xs);
@@ -180,23 +179,27 @@ span {
   color: black;
   display: flex;
   align-items: flex-start;
-  gap: 6px;
+  gap: 3px;
   margin: var(--margin-xxs) 0px;
   border-bottom: 1px solid var(--activer-btn);
   padding: 6px 0px;
 }
 
 h6 {
-  font-size: 1.2rem;
+  font-size: 1rem;
   line-height: 1;
   font-weight: 500;
 }
 
 .d-flex-1 {
   display: flex;
-  gap: 8px;
+  gap: 4px;
   align-items: center;
   margin-bottom: 4px;
+  & div {
+    display: flex;
+    flex-wrap: nowrap;
+  }
 }
 
 .d-flex {
@@ -204,8 +207,8 @@ h6 {
 }
 
 .task-priority, .task-due-date {
-  font-size: 0.9rem;
-  margin-right: var(--margin-s);
+  font-size: 0.8rem;
+  margin-right: var(--margin-xxs);
   background-color: #e5e7eb;
   border-radius: 4px;
   padding: 2px 2px;
@@ -239,7 +242,7 @@ h6 {
 }
 
 input[type=checkbox] {
-  transform: scale(1.4);
+  transform: scale(1.2);
 }
 
 .fa-trash {
@@ -283,7 +286,6 @@ input {
 .fa-bars {
   font-size: 1.7em;
   color: black;
-  
 }
 
 .fa-bars:hover {
