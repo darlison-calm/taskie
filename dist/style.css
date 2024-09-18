@@ -75,7 +75,7 @@ span {
 }
 
 .nav-item {
-  padding: var(--margin-xxs) var(--margin-);
+  padding: var(--margin-xxs) var(--margin-xs);
   margin: var(--margin-xxs) var(--margin-xs);
   & button {
     color: black;
@@ -390,4 +390,3 @@ input {
   }
 
 }
-

@@ -1,10 +1,16 @@
 # Taskie
 
-[![English README](https://img.shields.io/badge/English%20README-blue)](README.en.md)
+[![English README](https://img.shields.io/badge/English%20README-blue)](README.md)
 
 Taskie é uma aplicação avançada de gerenciamento de tarefas projetada para ajudar você a organizar e acompanhar suas atividades diárias de forma eficiente, com suporte para múltiplos projetos ou listas de tarefas.
 
 Acesse [Taskie](https://darlison-calm.github.io/taskie/)
+
+### Como rodar
+Instalar os pacotes do Node.JS:
+```markdown
+ npm install
+ ```
 
 ### Funcionalidades
 - Criar, editar e excluir tarefas
