@@ -1,5 +1,5 @@
-import { projectsManager } from "./project";
-import { Task, taskManager } from "./task-factory";
+import { projectsManager } from "../models/project";
+import { Task, taskManager } from "../models/task-factory";
 
 export function saveTaskState() {
   const tasks = taskManager.getAllTasks();

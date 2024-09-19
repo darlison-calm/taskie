@@ -1,5 +1,5 @@
 import { isSameDay, isSameWeek } from "date-fns";
-import { checkMatchingDate } from "./application";
+import { checkMatchingDate } from "../application";
 
 export class Task {
   constructor(title, dueDate = '', priority = '', description, projectId) {

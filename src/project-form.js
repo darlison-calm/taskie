@@ -1,6 +1,6 @@
 import PubSub from "./utils/pubsub";
 import { EVENTS } from "./utils/constants";
-import { projectsManager } from "./project";
+import { projectsManager } from "./models/project";
 export const projectForm = {
 
   setupAddProjectEventListener() {

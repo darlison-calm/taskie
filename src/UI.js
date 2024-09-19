@@ -3,11 +3,10 @@ import { EVENTS } from "./utils/constants";
 import { addDomElement } from "./utils/addDomElement";
 import { format} from "date-fns";
 import { ptBR } from "date-fns/locale";
-import { taskManager } from "./task-factory";
-import { projectsManager } from "./project";
-import { Task } from "./task-factory";
+import { taskManager, Task } from "./models/task-factory";
+import { projectsManager } from "./models/project";
 import { editTask } from "./application";
-import { saveTaskState } from "./storageManager";
+import { saveTaskState } from "./utils/storageManager";
 import { deleteProject } from "./application";
 
 

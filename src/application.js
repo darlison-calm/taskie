@@ -1,10 +1,10 @@
 import PubSub from "./utils/pubsub.js";
 import { EVENTS } from "./utils/constants.js";
-import { taskManager } from "./task-factory.js";
-import { projectsManager } from "./project.js";
+import { taskManager } from "./models/task-factory.js";
+import { projectsManager } from "./models/project.js";
 import { displayTasks, manageActiveBtnStyle, displayProjectList, openNav, closeNav} from './UI.js';
 import { format } from "date-fns";
-import { saveProjectState, saveTaskState } from "./storageManager.js";
+import { saveProjectState, saveTaskState } from "./utils/storageManager.js";
 
 export function createTask(task) {
   taskManager.addTask(task)
