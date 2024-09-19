@@ -1,5 +1,5 @@
 import PubSub from "./utils/pubsub";
-import { Task } from "./task-factory";
+import { Task } from "./models/task-factory";
 import { EVENTS } from "./utils/constants";
 import { populateSelectProject } from "./UI";
 
