@@ -121,7 +121,7 @@ function displayTask(task, tasksContainer) {
   })
 
   btnEdit.addEventListener('click', (e) => {
-    const taskId = Number(e.target.dataset.id)
+    const taskId = e.target.dataset.id
     handleTaskEditClick(taskManager.getTaskById(taskId), taskId)
   })
   

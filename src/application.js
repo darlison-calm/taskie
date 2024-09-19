@@ -72,7 +72,6 @@ function toogleSidebar() {
   })
 }
 
-
 export function renderProjectList() {
   PubSub.publish(EVENTS.PROJECT_LIST_UPDATE , projectsManager.getProjects())
 }

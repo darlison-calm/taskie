@@ -11,14 +11,9 @@ export class Task {
     this._projectId = projectId;
     this._id = Task.generateId()
   }
-  static taskId = 0
-
+  
   static generateId() {
-    return Task.taskId++;
-  }
-
-  set id(value) {
-    this._id = value;
+    return 'task_' + Date.now().toString(36) + Math.random().toString(36).substring(2, 5);
   }
 
   get id() {
