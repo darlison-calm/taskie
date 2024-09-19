@@ -75,7 +75,6 @@ span {
 }
 
 .nav-item {
-  padding: var(--margin-xxs) var(--margin-);
   margin: var(--margin-xxs) var(--margin-xs);
   & button {
     color: black;
