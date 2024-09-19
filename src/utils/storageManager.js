@@ -12,7 +12,6 @@ export function loadTaskState() {
   const tasksLoaded = savedTasks.map((json) => {
     const task = new Task(json._title, json._dueDate, json._priority, json._description, json._projectId);
     task.complete = json._complete
-    task.id = json._id
     return task
   })
   taskManager.setTasks(tasksLoaded);
